@@ -12,13 +12,13 @@ class UserController extends Controller
         $request->validate(
             [
                 'email' => ['required', 'string', 'email', 'max:255'],
-                'password' => ['required', 'string', 'min:6', 'max:255']
+                'palavra_passe' => ['required', 'string', 'min:6', 'max:255']
             ]
         );
 
-        $credencials = $request->only('email', 'password');
+        $credencials = $request->only('email', 'palavra_passe');
         if (Auth::attempt($credencials)) {
-            return redirect()->route('home', app()->getLocale());
+            return redirect()->route('home');
         } else {
             return back()->with(['error' => "E-mail ou Palavra-Passe Incorrectos"]);
         }
@@ -26,7 +26,7 @@ class UserController extends Controller
 
     public function logout(){
         Auth::logout();
-        return redirect()->route('login', app()->getLocale());
+        return redirect()->route('login');
     }
 
     public function login(){
