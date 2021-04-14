@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', "HomeController@index")->home();
+Route::get('/', "HomeController@index")->name('home');
 
 Route::group(['prefix'=>"user"], function(){
     Route::get('/login', "UserController@login")->name('login');
