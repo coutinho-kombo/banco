@@ -26,9 +26,9 @@
             </div>
             <div class="form-group">
                 <label for="password">Palavra-Passe</label>
-                <input type="password" name="palavra_passe" class="form-control" placeholder="Palavra-Passe">
-                @if($errors->has('palavra_passe'))
-                <span class="text-danger">{{$errors->first('palavra_passe')}}</span>
+                <input type="password" name="password" class="form-control" placeholder="Palavra-Passe">
+                @if($errors->has('password'))
+                <span class="text-danger">{{$errors->first('password')}}</span>
                 @endif
             </div>
         

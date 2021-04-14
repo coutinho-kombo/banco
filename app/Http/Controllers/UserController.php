@@ -12,15 +12,16 @@ class UserController extends Controller
         $request->validate(
             [
                 'email' => ['required', 'string', 'email', 'max:255'],
-                'palavra_passe' => ['required', 'string', 'min:6', 'max:255']
+                'password' => ['required', 'string', 'min:6', 'max:255']
             ]
         );
 
-        $credencials = $request->only('email', 'palavra_passe');
+        $credencials = array_merge($request->only('email', 'password'), ['is_verified' => 1]);
         if (Auth::attempt($credencials)) {
             return redirect()->route('home');
         } else {
-            return back()->with(['error' => "E-mail ou Palavra-Passe Incorrectos"]);
+
+            return back()->with(['error' => "Erro no Email ou Palavra-Passe"]);
         }
     }
 

@@ -14,7 +14,7 @@ class UsuarioSeeder extends Seeder
                 'email' => "nic340k@gmail.com",
                 'password' => Hash::make("olaola"),
                 'estado' => "on",
-                'nivel_acesso' => "estudante",
+                'acesso' => "estudante",
                 'verification_code'=>"78327382732gdjsg",
                 'is_verified'=>1,
                 'email_verified_at'=>"2021-04-13 12:14:11",
@@ -25,7 +25,7 @@ class UsuarioSeeder extends Seeder
                 'email' => "html@gmail.com",
                 'password' => Hash::make("baba"),
                 'estado' => "on",
-                'nivel_acesso' => "admin",
+                'acesso' => "admin",
                 'verification_code'=>"78327382732gdjsg32",
                 'is_verified'=>1,
                 'email_verified_at'=>"2021-04-13 12:14:11"
