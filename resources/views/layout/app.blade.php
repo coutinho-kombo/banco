@@ -11,6 +11,8 @@
 	<link rel="stylesheet" href="{{asset('assets/css/demo.css')}}">
 </head>
 <body>
+    @if ($type!="login")
+       
 	<div class="wrapper">
 		<div class="main-header">
 			<div class="logo-header">
@@ -266,7 +268,10 @@
 				</div>
 			</div>
 		</div>
-	</div>
+    </div>
+     @else
+     @yield('content')
+    @endif
 </body>
 <script src="{{asset('assets/js/core/jquery.3.2.1.min.js')}}"></script>
 <script src="{{asset('assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js')}}"></script>
