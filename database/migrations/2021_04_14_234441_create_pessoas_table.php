@@ -14,8 +14,18 @@ class CreatePessoasTable extends Migration
     public function up()
     {
         Schema::create('pessoas', function (Blueprint $table) {
-            $table->id();
+            $table->engine = "InnoDB";
+            $table->bigIncrements('id');
+            $table->bigInteger('id_municipio')->unsigned()->index();
+            $table->string('nome');
+            $table->date('data_nascimento')->nullable();
+            $table->string('genero');
+            $table->text('foto')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('pessoas', function (Blueprint $table) {
+            $table->foreign('id_municipio')->references('id')->on('municipios')->onUpdate('cascade');
         });
     }
 

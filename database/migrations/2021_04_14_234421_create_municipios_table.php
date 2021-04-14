@@ -14,8 +14,15 @@ class CreateMunicipiosTable extends Migration
     public function up()
     {
         Schema::create('municipios', function (Blueprint $table) {
-            $table->id();
+            $table->engine = "InnoDB";
+            $table->bigIncrements('id');
+            $table->bigInteger('id_provincia')->unsigned()->index();
+            $table->string('municipio');
             $table->timestamps();
+        });
+
+        Schema::table('municipios', function (Blueprint $table) {
+            $table->foreign('id_provincia')->references('id')->on('provincias')->onUpdate('cascade');
         });
     }
 

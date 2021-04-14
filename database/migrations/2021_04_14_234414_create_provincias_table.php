@@ -14,8 +14,16 @@ class CreateProvinciasTable extends Migration
     public function up()
     {
         Schema::create('provincias', function (Blueprint $table) {
-            $table->id();
+            $table->engine = "InnoDB";
+            $table->bigIncrements('id');
+            $table->bigInteger('id_pais')->unsigned()->index();
+            $table->string('provincia');
+            $table->string('cidade_cede')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('provincias', function (Blueprint $table) {
+            $table->foreign('id_pais')->references('id')->on('pais')->onUpdate('cascade');
         });
     }
 

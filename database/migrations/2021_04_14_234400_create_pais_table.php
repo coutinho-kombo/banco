@@ -14,11 +14,15 @@ class CreatePaisTable extends Migration
     public function up()
     {
         Schema::create('pais', function (Blueprint $table) {
-            $table->id();
+            $table->engine = "InnoDB";
+            $table->bigIncrements('id');
+            $table->string('pais')->unique();
+            $table->string('capital');
+            $table->string('indicativo')->unique();
+            $table->text('img_bandeira')->nullable();
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
