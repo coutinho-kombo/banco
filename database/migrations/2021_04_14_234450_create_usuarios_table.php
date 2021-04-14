@@ -21,6 +21,10 @@ class CreateUsuariosTable extends Migration
             $table->text('password');
             $table->string('estado');
             $table->string('acesso');
+
+            $table->string('verification_code')->nullable();
+            $table->integer('is_verified')->default(0);
+            $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
         });
 

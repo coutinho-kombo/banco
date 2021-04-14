@@ -22,6 +22,9 @@ class User extends Authenticatable
         'password',
         'estado',
         'acesso',
+        'verification_code',
+        'is_verified',
+        'email_verified_at',
     ];
 
     /**
@@ -42,7 +45,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function pessoa(){
+    public function pessoa()
+    {
         return $this->belongsTo(Pessoa::class, 'id_pessoa', 'id');
     }
 }
