@@ -21,7 +21,7 @@ class ServicoController extends Controller
             'type' => "servicos",
             'menu' => "Serviços",
             'submenu' => "Listar",
-            'getServicos'=>$servicos,
+            'getServicos' => $servicos,
         ];
         return view('servicos.list', $data);
     }
@@ -39,7 +39,7 @@ class ServicoController extends Controller
             'type' => "servicos",
             'menu' => "Serviços",
             'submenu' => "Novo",
-            'getModoPagamento'=>$modo_pagamentos,
+            'getModoPagamento' => $modo_pagamentos,
         ];
         return view('servicos.create', $data);
     }
@@ -53,11 +53,22 @@ class ServicoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'servico'=>['required', 'string', 'min:10', 'max:255'],
-            'estado'=>['required', 'string', 'min:1', 'max:3'],
-            'valor'=>['required','numeric', 'min:0'],
-            'modo'=>['required', 'integer'],
+            'servico' => ['required', 'string', 'min:10', 'max:255'],
+            'estado' => ['required', 'string', 'min:1', 'max:3'],
+            'valor' => ['required', 'numeric', 'min:0'],
+            'modo' => ['required', 'integer'],
         ]);
+
+        $data = [
+            'id_modo'=>$request->modo,
+            'servico'=>$request->servico,
+            'valor'=>$request->valor,
+            'estado'=>$request->estado,
+        ];
+
+        if(Servico::create($data)){
+           return back()->with(['success'=>"Feito com sucesso"]); 
+        }
     }
 
     /**

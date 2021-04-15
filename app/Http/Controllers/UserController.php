@@ -118,7 +118,7 @@ class UserController extends Controller
             'id_usuario'=>null,
             'conta'=>null,
             'valor_existente'=>0,
-            'estado'=>"off",
+            'estado'=>"on",
         ];
 
         if ($request->hasFile('foto') && $request->foto->isValid()) {
