@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="{{asset('assets/css/ready.css')}}">
 	<link rel="stylesheet" href="{{asset('assets/css/demo.css')}}">
 </head>
-<body>
+<body class="@if ($type=="login") login-page @endif">
     @if ($type!="login")
        
 	<div class="wrapper">

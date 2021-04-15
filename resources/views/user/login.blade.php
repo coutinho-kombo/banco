@@ -1,7 +1,8 @@
 @extends('layout.app')
 @section('content')
-    
-<div class="col-md-6">
+    <div class="login-box">
+        <div class="login-logo">
+
     <div class="card">
         <div class="card-header">
             <div class="card-title">Inciar Sessão</div>
@@ -32,19 +33,23 @@
                 @endif
             </div>
         
-            <div class="form-group">
-               <div class="form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" value="">
-                        <span class="form-check-sign">Lembrar-me</span>
-                    </label>
-                </div>
+            <div class="operacoesForm">
+                <div class="form-group">
+                    <div class="form-check">
+                         <label class="form-check-label">
+                             <input class="form-check-input" type="checkbox" value="">
+                             <span class="form-check-sign">Lembrar-me</span>
+                         </label>
+                     </div>
+                 </div>
+                 <div class="buttonLogin">
+                     <button class="btn btn-primary">Entrar</button>
+                 </div>
             </div>
-            <div class="card-action">
-                <button class="btn btn-success">Entrar</button>
-            </div>
+           
             {{Form::close()}}
         </div>
     </div>
-
+</div>
+    </div>
 @endsection
