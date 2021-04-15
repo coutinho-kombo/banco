@@ -137,9 +137,12 @@
                             <div class="form-group">
                                 <div class="form-check">
                                      <label class="form-check-label">
-                                         <input class="form-check-input" type="checkbox" value="">
+                                         <input class="form-check-input" name="termo" type="checkbox" value="">
                                          <span class="form-check-sign">Aceitar Termos de Contrato</span> &nbsp; &nbsp; <a href="/user/contrat">Ler Termos</a>
                                      </label>
+                                     @if($errors->has('termo'))
+                                    <span class="text-danger">{{$errors->first('termo')}}</span>
+                                    @endif
                                  </div>
                              </div>
                              <div class="buttonLogin">
@@ -174,7 +177,7 @@
                     data: data,
                     dataType: "html",
                     success: function (response) {
-                       console.log(response);
+                       $('.loadMunicipios').html(response);
                     }
                 });
     

@@ -14,7 +14,7 @@ Circles.create({
 	styleText:    true
 })
 
-$.notify({
+/*$.notify({
 	icon: 'la la-bell',
 	title: 'Bootstrap notify',
 	message: 'Turning standard Bootstrap alerts into "notify" like notifications',
@@ -25,7 +25,7 @@ $.notify({
 		align: "right"
 	},
 	time: 1000,
-});
+});*/
 
 // monthlyChart
 
