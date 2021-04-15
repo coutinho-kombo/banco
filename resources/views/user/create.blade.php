@@ -80,6 +80,16 @@
                            @endif
                         </div>
                        </div>
+
+                       <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="telefone">Nº de Telefone</label> <span class="text-danger">*</span>
+                                {{Form::number('telefone', null, ['class'=>"form-control", 'placeholder'=>"Nº de Telefone"])}}
+                            @if($errors->has('telefone'))
+                            <span class="text-danger">{{$errors->first('telefone')}}</span>
+                            @endif
+                        </div>
+                    </div>
                     
                        <div class="col-md-12">
                         <div class="form-group">
@@ -147,4 +157,29 @@
     </div>
 </div>
     </div>
+
+    <script>
+        $(document).ready(function(){
+            $('.provincia').change(function (e) { 
+                e.preventDefault();
+                var data = {
+                    _token: "{{csrf_token()}}",
+                    id_provincia: $(this).val()
+                };
+                if(data.id_provincia!=""){
+    
+               $.ajax({
+                    type: "post",
+                    url: "{{route('getMunicipios')}}",
+                    data: data,
+                    dataType: "html",
+                    success: function (response) {
+                       $('.loadMunicipios').html(response);
+                    }
+                });
+    
+            }
+            });
+        });
+    </script>
 @endsection

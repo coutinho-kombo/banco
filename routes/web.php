@@ -31,3 +31,9 @@ Route::group(['prefix' => "estudantes", 'middleware' => "adminAuth"], function (
     Route::post('/store', "EstudanteController@store");
     Route::put('/update/{id}', "EstudanteController@update");
 });
+
+/*ajax request*/
+Route::group(['prefix' => "ajax", 'middleware' => "auth"], function () {
+    Route::post('getMunicipios', "AjaxRequestController@getMunicipios")->name('getMunicipios');
+    
+  });
