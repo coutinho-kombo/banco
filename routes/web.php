@@ -20,3 +20,12 @@ Route::group(['prefix'=>"user"], function(){
     Route::get('/logout', "UserController@logout")->name('logout');
     Route::post('/logar', "UserController@logar")->name('logar');
 });
+
+Route::group(['prefix'=>"estudantes", 'middleware'=>"adminAuth"], function(){
+    Route::get('/list', "EstudanteController@index");
+    Route::get('/create', "EstudanteController@create");
+    Route::get('/show/{id}', "EstudanteController@show");
+    Route::get('/edit/{id}', "EstudanteController@edit");
+    Route::post('/store', "EstudanteController@store");
+    Route::put('/update/{id}', "EstudanteController@update");
+});
