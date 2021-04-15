@@ -45,7 +45,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="valor">Valor(Akz)</label> <span class="text-danger">*</span>
-                               {{Form::number('valor', null, ['class'=>"form-control", 'placeholder'=>"Valor"])}}
+                               {{Form::text('valor', null, ['class'=>"form-control", 'placeholder'=>"Valor"])}}
                                @if($errors->has('valor'))
                                <span class="text-danger">{{$errors->first('valor')}}</span>
                                 @endif
@@ -64,6 +64,13 @@
                                 @endif
                             </div>
                         </div>
+
+                        <div class="col-md-12">
+                                <div class="buttonLogin">
+                                     <button class="btn btn-primary">Salvar</button>
+                                     
+                                 </div>
+                         </div>
                     </div>
                 {{Form::close()}}
                </div>

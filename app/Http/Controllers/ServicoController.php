@@ -33,7 +33,7 @@ class ServicoController extends Controller
      */
     public function create()
     {
-        $modo_pagamentos = ModoPagamento::where(['estado'=>"on"])->pluck('modo', 'id');
+        $modo_pagamentos = ModoPagamento::pluck('modo', 'id');
         $data = [
             'title' => "Serviços",
             'type' => "servicos",
@@ -52,7 +52,12 @@ class ServicoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'servico'=>['required', 'string', 'min:10', 'max:255'],
+            'estado'=>['required', 'string', 'min:1', 'max:3'],
+            'valor'=>['required','numeric', 'min:0'],
+            'modo'=>['required', 'integer'],
+        ]);
     }
 
     /**
