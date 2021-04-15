@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             PessoaSeeder::class,
             UsuarioSeeder::class,
             ContaSeeder::class,
+            ModoPagamentoSeeder::class,
         ]);
     }
 }
