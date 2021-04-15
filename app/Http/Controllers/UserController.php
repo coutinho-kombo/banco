@@ -69,4 +69,20 @@ class UserController extends Controller
 
         return view('user.contrat', $data);
     }
+
+    public function store(Request $request){
+        $request->validate([
+            'nome'=>['required', 'string', 'min:12', 'max:255'],
+            'data'=>['required', 'date'],
+            'telefone'=>['required', 'integer'],
+            'genero'=>['required', 'string', 'min:1'],
+            'email'=>['required', 'email', 'unique:usuarios,email'],
+            'provincia'=>['required', 'integer'],
+            'municipio'=>['required', 'integer'],
+            'username'=>['required', 'string', 'min:10', 'max:255', 'unique:usuarios,username'],
+            'password'=>['required', 'string', 'min:6', 'max:255'],
+            'confirm_password'=>['required', 'string', 'min:6', 'max:255'],
+            'termo'=>['required'],
+        ]);
+    }
 }
