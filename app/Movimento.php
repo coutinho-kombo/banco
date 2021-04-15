@@ -11,11 +11,13 @@ class Movimento extends Model
     protected $fillable = [
         'id_conta',
         'tipo',
+        'descricao',
         'valor',
         'estado',
     ];
 
-    public function conta(){
+    public function conta()
+    {
         return $this->belongsTo(Conta::class, 'id_conta', 'id');
     }
 }
