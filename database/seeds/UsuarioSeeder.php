@@ -23,7 +23,7 @@ class UsuarioSeeder extends Seeder
             [
                 'id_pessoa' => 2,
                 'email' => "html@gmail.com",
-                'password' => Hash::make("baba"),
+                'password' => Hash::make("baba20"),
                 'estado' => "on",
                 'acesso' => "admin",
                 'verification_code'=>"78327382732gdjsg32",
