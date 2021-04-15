@@ -215,6 +215,7 @@
 							</a>
 						</li>
 
+						@if(Auth::check())
 						@if (Auth::user()->acesso=="estudante")
 						<li class="nav-item @if($menu=="Pagamentos") active @endif">
 							<a href="/pagamentos/">
@@ -222,6 +223,7 @@
 								<p>Pagamento</p>
 							</a>
 						</li>
+						@endif
 						@endif
 
 						@if(Auth::check())
