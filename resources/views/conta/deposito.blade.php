@@ -4,7 +4,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-            <div class="card-title">{{$submenu}} &nbsp;&nbsp;&nbsp;&nbsp;<a href="#">{{$getConta->usuario->pessoa->nome}} - {{$getConta->conta}}</a></div>
+            <div class="card-title">{{$submenu}} &nbsp;&nbsp;&nbsp;&nbsp;<a href="#">{{$getConta->usuario->pessoa->nome}} - {{$getConta->conta}} - <span class="text-danger">{{number_format($getConta->valor_existente, 2,',','.')}} Akz</span></a></div>
             </div>
             <div class="card-body">
                 <div class="card-sub">									
