@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\ModoPagamento;
+use App\Servico;
 use Illuminate\Http\Request;
 
 class ServicoController extends Controller
@@ -13,11 +15,13 @@ class ServicoController extends Controller
      */
     public function index()
     {
+        $servicos = Servico::paginate(5);
         $data = [
             'title' => "Serviços",
             'type' => "servicos",
             'menu' => "Serviços",
             'submenu' => "Listar",
+            'getServicos'=>$servicos,
         ];
         return view('servicos.list', $data);
     }
@@ -29,7 +33,15 @@ class ServicoController extends Controller
      */
     public function create()
     {
-        //
+        $modo_pagamentos = ModoPagamento::where(['estado'=>"on"])->pluck('modo', 'id');
+        $data = [
+            'title' => "Serviços",
+            'type' => "servicos",
+            'menu' => "Serviços",
+            'submenu' => "Novo",
+            'getModoPagamento'=>$modo_pagamentos,
+        ];
+        return view('servicos.create', $data);
     }
 
     /**

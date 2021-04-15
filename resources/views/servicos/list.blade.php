@@ -14,21 +14,33 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
+                            <th scope="col">Serviço</th>
+                            <th scope="col">Modo de Pagamento</th>
+                            <th scope="col">Valor</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Operações</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($getServicos as $servicos)
                         <tr>
-                            <td>1</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{$servicos->servico}}</td>
+                        <td>{{$servicos->modo_pagamento->modo}}</td>
+                        <td>{{$$servicos->valor}}</td>
+                        <td>{{$servicos->estado}}</td>
+                        <td>
+                            <a href="/servicos/edit/{{$servicos->id}}" class="btn btn-danger btn-sm">Editar</a>
+                           &nbsp;&nbsp; 
+                           <a href="/servicos/delete/{{$servicos->id}}" class="btn btn-danger btn-sm">Eliminar</a>
+                        </td>
                         </tr>
-                       
+                       @endforeach
                     </tbody>
                 </table>
+                <div class="pagination">
+                    {{$getServicos->links()}}
+                </div>
             </div>
         </div>
        
