@@ -8,7 +8,7 @@ class ContaSeeder extends Seeder
     static $contas = [
         [
             'id_usuario'=>2,
-            'conta'=>"200-0002-BANC",
+            'conta'=>"200-0002BANC",
             'valor_existente'=>2000,
             'estado'=>"on",
         ],

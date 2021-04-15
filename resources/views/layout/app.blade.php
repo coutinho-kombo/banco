@@ -132,7 +132,14 @@
 											@if(Auth::check())
 											{{Auth::user()->username}}
 											@endif
-										</p><a href="/perfil" class="btn btn-rounded btn-danger btn-sm">Ver Perfil</a></div>
+										</p>
+										@if (Auth::user()->acesso=="admin")
+										<a href="/perfil" class="btn btn-rounded btn-danger btn-sm">Ver Perfil</a>
+										@else
+										{{Auth::user()->conta}}
+										
+										@endif
+										</div>
 										</div>
 									</li>
 									<div class="dropdown-divider"></div>
