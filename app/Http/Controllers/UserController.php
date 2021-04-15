@@ -40,4 +40,26 @@ class UserController extends Controller
 
         return view('user.login', $data);
     }
+
+    public function create(){
+        $data = [
+            'title' => "Criar Conta",
+            'type' => "login",
+            'menu' => "Criar Conta",
+            'submenu' => null,
+        ];
+
+        return view('user.create', $data);
+    }
+
+    public function contrat(){
+        $data = [
+            'title' => "Contrato",
+            'type' => "login",
+            'menu' => "Contrato",
+            'submenu' => null,
+        ];
+
+        return view('user.contrat', $data);
+    }
 }

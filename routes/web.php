@@ -19,6 +19,8 @@ Route::group(['prefix' => "user"], function () {
     Route::get('/login', "UserController@login")->name('login');
     Route::get('/logout', "UserController@logout")->name('logout');
     Route::post('/logar', "UserController@logar")->name('logar');
+    Route::get('/create', "UserController@create");
+    Route::get('/contrat', "UserController@contrat");
 });
 
 Route::group(['prefix' => "estudantes", 'middleware' => "adminAuth"], function () {
