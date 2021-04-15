@@ -44,6 +44,7 @@
                  </div>
                  <div class="buttonLogin">
                      <button class="btn btn-primary">Entrar</button>
+                     &nbsp;&nbsp;&nbsp;
                  </div>
             </div>
            
