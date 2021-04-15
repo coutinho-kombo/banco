@@ -215,6 +215,15 @@
 							</a>
 						</li>
 
+						@if (Auth::user()->acesso=="estudante")
+						<li class="nav-item @if($menu=="Pagamentos") active @endif">
+							<a href="/pagamentos/">
+								<i class="la la-table"></i>
+								<p>Pagamento</p>
+							</a>
+						</li>
+						@endif
+
 						@if(Auth::check())
 							@if(Auth::user()->acesso=="admin")
 						<li class="nav-item @if($menu=="Estudantes") active @endif">

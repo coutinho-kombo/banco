@@ -53,7 +53,7 @@ class ServicoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'servico' => ['required', 'string', 'min:10', 'max:255'],
+            'servico' => ['required', 'string', 'min:6', 'max:255'],
             'estado' => ['required', 'string', 'min:1', 'max:3'],
             'valor' => ['required', 'numeric', 'min:0'],
             'modo' => ['required', 'integer'],

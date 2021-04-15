@@ -12,6 +12,8 @@ class ModoPagamentoSeeder extends Seeder
             'modo'=>"Anual"
         ],[
             'modo'=>"Temporal"
+        ],[
+            'modo'=>"Mensal"
         ],
     ];
     

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Conta;
 use Illuminate\Http\Request;
 
 class ContaController extends Controller
@@ -13,7 +14,15 @@ class ContaController extends Controller
      */
     public function index()
     {
-        //
+        $contas = Conta::paginate(5);
+        $data = [
+            'title' => "Contas",
+            'type' => "contas",
+            'menu' => "Contas",
+            'submenu' => "Listar",
+            'getContas' => $contas,
+        ];
+        return view('conta.list', $data);
     }
 
     /**

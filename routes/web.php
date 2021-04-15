@@ -42,6 +42,15 @@ Route::group(['prefix' => "servicos", 'middleware' => "adminAuth"], function () 
     Route::put('/update/{id}', "ServicoController@update");
 });
 
+Route::group(['prefix' => "contas", 'middleware' => "adminAuth"], function () {
+    Route::get('/', "ContaController@index");
+    Route::get('/create', "ContaController@create");
+    Route::get('/show/{id}', "ContaController@show");
+    Route::get('/edit/{id}', "ContaController@edit");
+    Route::post('/store', "ContaController@store");
+    Route::put('/update/{id}', "ContaController@update");
+});
+
 /*ajax request*/
 Route::group(['prefix' => "ajax"], function () {
     Route::post('getMunicipios', "AjaxRequestController@getMunicipios")->name('getMunicipios');
