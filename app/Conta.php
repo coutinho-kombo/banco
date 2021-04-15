@@ -18,4 +18,8 @@ class Conta extends Model
     public function usuario(){
         return $this->belongsTo(User::class, 'id_usuario', 'id');
     }
+
+    public function movimento(){
+        return $this->hasMany(Movimento::class, 'id_conta', 'id');
+    }
 }
