@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Provincia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -70,19 +71,46 @@ class UserController extends Controller
         return view('user.contrat', $data);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $request->validate([
-            'nome'=>['required', 'string', 'min:12', 'max:255'],
-            'data'=>['required', 'date'],
-            'telefone'=>['required', 'integer'],
-            'genero'=>['required', 'string', 'min:1'],
-            'email'=>['required', 'email', 'unique:usuarios,email'],
-            'provincia'=>['required', 'integer'],
-            'municipio'=>['required', 'integer'],
-            'username'=>['required', 'string', 'min:10', 'max:255', 'unique:usuarios,username'],
-            'password'=>['required', 'string', 'min:6', 'max:255'],
-            'confirm_password'=>['required', 'string', 'min:6', 'max:255'],
-            'termo'=>['required'],
+            'nome' => ['required', 'string', 'min:12', 'max:255'],
+            'data' => ['required', 'date'],
+            'telefone' => ['required', 'integer'],
+            'genero' => ['required', 'string', 'min:1'],
+            'email' => ['required', 'email', 'unique:usuarios,email'],
+            'provincia' => ['required', 'integer'],
+            'municipio' => ['required', 'integer'],
+            'username' => ['required', 'string', 'min:10', 'max:255', 'unique:usuarios,username'],
+            'password' => ['required', 'string', 'min:6', 'max:255'],
+            'confirm_password' => ['required', 'string', 'min:6', 'max:255'],
+            'termo' => ['required'],
+            'termo.*' => ['string'],
         ]);
+
+        if ($request->password != $request->confirm_password) {
+            return back()->with(['error' => "Nome de Usuário e Palavra-Passe diferentes"]);
+        }
+
+        $data['user'] = [
+            'id_pessoa' => null,
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
+            'estado' => "on",
+            'acesso' => "estudante",
+            'email' => $request->email,
+            'is_verified' => 1,
+        ];
+
+        $data['person'] = [
+            'id_municipio' => $request->id_municipio,
+            'nome' => $request->nome,
+            'data_nascimento' => $request->data,
+            'genero' => $request->genero,
+            'foto' => null,
+            'telefone' => $request->telefone,
+        ];
+
+        
     }
 }
