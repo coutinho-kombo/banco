@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 class AjaxRequestController extends Controller
 {
     public function getMunicipios(Request $request){
+        
         $request->validate([
             'id_provincia'=>['required', 'integer'],
         ]);
@@ -15,6 +16,6 @@ class AjaxRequestController extends Controller
         $data = [
             'getMunicipios'=>$municipios,
         ];  
-        return view('ajax.getMunicipios', $data); 
+        return view('ajax.getMunicipios', $data);
     }
 }

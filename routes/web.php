@@ -33,7 +33,7 @@ Route::group(['prefix' => "estudantes", 'middleware' => "adminAuth"], function (
 });
 
 /*ajax request*/
-Route::group(['prefix' => "ajax", 'middleware' => "auth"], function () {
+Route::group(['prefix' => "ajax"], function () {
     Route::post('getMunicipios', "AjaxRequestController@getMunicipios")->name('getMunicipios');
     
   });
