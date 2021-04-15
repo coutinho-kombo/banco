@@ -17,6 +17,48 @@
                      @endif
                     {{Form::open(['method'=>"post", 'name'=>"formLogin", 'url'=>"/user/logar"])}}
                     @csrf
+            <div class="row">
+                
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="nome">Nome de Completo</label>
+                           {{Form::text('nome', null, ['class'=>"form-control", 'placeholder'=>"Nome de Completo"])}}
+                           @if($errors->has('nome'))
+                           <span class="text-danger">{{$errors->first('nome')}}</span>
+                            @endif
+                        </div>
+                    </div>
+                   
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="genero">Gênero</label>
+                           {{Form::select('genero', [
+                               'M'=>"M",
+                               'F'=>"F"
+                           ], null, 
+                           ['class'=>"form-control", 'placeholder'=>"Gênero"])}}
+                           @if($errors->has('genero'))
+                           <span class="text-danger">{{$errors->first('genero')}}</span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="data">Data de Nascimento</label>
+               {{Form::date('data', null, ['class'=>"form-control", 'placeholder'=>"Data de Nascimento"])}}
+               @if($errors->has('data'))
+               <span class="text-danger">{{$errors->first('data')}}</span>
+                @endif
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="data">Foto</label>
+               {{Form::file('foto', null, ['class'=>"form-control", 'placeholder'=>"Foto"])}}
+               @if($errors->has('foto'))
+               <span class="text-danger">{{$errors->first('foto')}}</span>
+                @endif
+                    </div>
+                    
 
             <div class="form-group">
                 <label for="username">Nome de Usuário</label>
@@ -30,6 +72,14 @@
                 <input type="password" name="password" class="form-control" placeholder="Palavra-Passe">
                 @if($errors->has('password'))
                 <span class="text-danger">{{$errors->first('password')}}</span>
+                @endif
+            </div>
+
+            <div class="form-group">
+                <label for="confirm_password">Confirmar Palavra-Passe</label>
+                <input type="password" name="confirm_password" class="form-control" placeholder="Palavra-Passe">
+                @if($errors->has('confirm_password'))
+                <span class="text-danger">{{$errors->first('confirm_password')}}</span>
                 @endif
             </div>
         
@@ -49,6 +99,7 @@
                  </div>
             </div>
            
+        </div>
             {{Form::close()}}
         </div>
     </div>
