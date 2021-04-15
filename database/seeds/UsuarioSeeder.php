@@ -19,7 +19,7 @@ class UsuarioSeeder extends Seeder
                 'verification_code'=>"78327382732gdjsg",
                 'is_verified'=>1,
                 'email_verified_at'=>"2021-04-13 12:14:11",
-            ],
+            ], 
 
             [
                 'id_pessoa' => 2,

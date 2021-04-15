@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             MunicipioSeeder::class,
             PessoaSeeder::class,
             UsuarioSeeder::class,
-
+            ContaSeeder::class,
         ]);
     }
 }

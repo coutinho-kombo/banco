@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Conta;
 use App\Pessoa;
 use App\Provincia;
 use App\User;
@@ -113,6 +114,13 @@ class UserController extends Controller
             'telefone' => $request->telefone,
         ];
 
+        $data['count'] = [
+            'id_usuario'=>null,
+            'conta'=>null,
+            'valor_existente'=>0,
+            'estado'=>"off",
+        ];
+
         if ($request->hasFile('foto') && $request->foto->isValid()) {
             $request->validate([
                 'foto' => ['required', 'mimes:jpg,jpeg,png,JPG,JPEG,PNG', 'max:5000']
@@ -126,7 +134,12 @@ class UserController extends Controller
             $data['person']['id_pessoa'] = $person->id;
             $user = User::create($data['user']);
             if($user){
-                return back()->with(['success'=>"Cadastro feito com sucesso"]);
+                $data['count']['id_usuario']=$user->id;
+                $data['count']['conta']=$user->id."00-000".$person->id."BANC";
+                $conta = Conta::create($data['count']);
+                if($conta){
+                    return back()->with(['success'=>"Cadastro feito com sucesso"]);
+                }
             }
         }
     }
