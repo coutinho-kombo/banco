@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Pessoa;
 use App\Provincia;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -111,6 +113,21 @@ class UserController extends Controller
             'telefone' => $request->telefone,
         ];
 
-        
+        if ($request->hasFile('foto') && $request->foto->isValid()) {
+            $request->validate([
+                'foto' => ['required', 'mimes:jpg,jpeg,png,JPG,JPEG,PNG', 'max:5000']
+            ]);
+            $path = $request->file('foto')->store('img_estudantes');
+            $data['person']['foto'] = $path;
+        }
+
+        $person = Pessoa::create($data['person']);
+        if($person){
+            $data['person']['id_pessoa'] = $person->id;
+            $user = User::create($data['user']);
+            if($user){
+                return back()->with(['success'=>"Cadastro feito com sucesso"]);
+            }
+        }
     }
 }
