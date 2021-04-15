@@ -213,6 +213,7 @@
 						</li>
 
 						@if(Auth::check())
+							@if(Auth::user()->acesso=="admin")
 						<li class="nav-item">
 							<a href="/estudantes/">
 								<i class="la la-table"></i>
@@ -239,6 +240,7 @@
 								<p>Movimentos</p>
 							</a>
 						</li>
+						@endif
 						<li class="nav-item">
 							<a href="/extras/">
 								<i class="la la-bell"></i>

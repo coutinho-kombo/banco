@@ -20,7 +20,7 @@
 
             <div class="form-group">
                 <label for="username">Nome de Usuário</label>
-               {{Form::email('username', null, ['class'=>"form-control", 'placeholder'=>"Nome de Usuário"])}}
+               {{Form::text('username', null, ['class'=>"form-control", 'placeholder'=>"Nome de Usuário"])}}
                @if($errors->has('username'))
                <span class="text-danger">{{$errors->first('username')}}</span>
                 @endif

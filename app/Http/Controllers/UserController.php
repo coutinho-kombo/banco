@@ -11,7 +11,7 @@ class UserController extends Controller
     {
         $request->validate(
             [
-                'username' => ['required', 'string', 'email', 'max:255'],
+                'username' => ['required', 'string', 'max:255'],
                 'password' => ['required', 'string', 'min:6', 'max:255']
             ]
         );
@@ -27,7 +27,7 @@ class UserController extends Controller
 
     public function logout(){
         Auth::logout();
-        return redirect()->route('login');
+        return redirect()->route('home');
     }
 
     public function login(){
