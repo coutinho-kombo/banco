@@ -14,6 +14,7 @@ class Pessoa extends Model
         'data_nascimento',
         'genero',
         'foto',
+        'telefone',
     ];
 
     public function municipio(){

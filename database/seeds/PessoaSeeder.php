@@ -9,12 +9,14 @@ class PessoaSeeder extends Seeder
         [
             'id_municipio'=>1,
             'nome'=>"Nicolau NP",
-            'genero'=>"M"
+            'genero'=>"M",
+            'telefone'=>946216795,
         ],
         [
             'id_municipio'=>2,
             'nome'=>"Banco Admin",
-            'genero'=>"M"
+            'genero'=>"M",
+            'telefone'=>993001881,
         ],
     ];
     public function run()

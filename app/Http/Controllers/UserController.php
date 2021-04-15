@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Provincia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,12 +26,14 @@ class UserController extends Controller
         }
     }
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         return redirect()->route('home');
     }
 
-    public function login(){
+    public function login()
+    {
         $data = [
             'title' => "Acesso Restrito",
             'type' => "login",
@@ -41,18 +44,22 @@ class UserController extends Controller
         return view('user.login', $data);
     }
 
-    public function create(){
+    public function create()
+    {
+        $provincias = Provincia::pluck('provincia', 'id');
         $data = [
             'title' => "Criar Conta",
             'type' => "login",
             'menu' => "Criar Conta",
             'submenu' => null,
+            'getProvincias' => $provincias,
         ];
 
         return view('user.create', $data);
     }
 
-    public function contrat(){
+    public function contrat()
+    {
         $data = [
             'title' => "Contrato",
             'type' => "login",

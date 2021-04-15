@@ -21,6 +21,7 @@ class CreatePessoasTable extends Migration
             $table->date('data_nascimento')->nullable();
             $table->string('genero');
             $table->text('foto')->nullable();
+            $table->bigInteger('telefone');
             $table->timestamps();
         });
 
