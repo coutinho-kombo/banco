@@ -112,16 +112,31 @@
 								<li>
 									<div class="user-box">
 										<div class="u-img"><img src="
+											@if(Auth::check())
 											@if(Auth::user()->pessoa->foto=="") https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png 
-										@else {{Auth::user()->pessoa->foto}} @endif" alt="{{Auth::user()->pessoa->nome}}"></div>
+										@else {{Auth::user()->pessoa->foto}} @endif
+										https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png
+										@endif" alt="
+										@if(Auth::check())
+										{{Auth::user()->pessoa->nome}}
+										@endif
+										"></div>
 										<div class="u-text">
-										<h4>{{Auth::user()->pessoa->nome}}</h4>
-										<p class="text-muted">{{Auth::user()->email}}</p><a href="/perfil" class="btn btn-rounded btn-danger btn-sm">Ver Perfil</a></div>
+										<h4>
+											@if(Auth::check())
+											{{Auth::user()->pessoa->nome}}
+											@endif
+										</h4>
+										<p class="text-muted">
+											@if(Auth::check())
+											{{Auth::user()->username}}
+											@endif
+										</p><a href="/perfil" class="btn btn-rounded btn-danger btn-sm">Ver Perfil</a></div>
 										</div>
 									</li>
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item" href="#"><i class="ti-user"></i> Meu Perfil</a>
-									<a class="dropdown-item" href="#"><i class="ti-email"></i> Entrada</a>
+									<a class="dropdown-item" href="#"><i class="ti-username"></i> Entrada</a>
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item" href="#"><i class="ti-settings"></i> Definições de Conta</a>
 									<div class="dropdown-divider"></div>
@@ -140,14 +155,29 @@
 					<div class="user">
 						<div class="photo">
 							<img src="
+							@if(Auth::check())
 							@if(Auth::user()->pessoa->foto=="") https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png 
-							@else {{Auth::user()->pessoa->foto}} @endif">
+							@else {{Auth::user()->pessoa->foto}} @endif
+							@else
+							https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png
+							@endif
+							">
 						</div>
 						<div class="info">
 							<a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
 								<span>
+									@if(Auth::check())
 									{{Auth::user()->pessoa->nome}}
-									<span class="user-level">{{Auth::user()->acesso}}</span>
+									@else
+									Nenhum
+									@endif
+									<span class="user-level">
+										@if(Auth::check())
+										{{Auth::user()->acesso}}
+										@else
+										Nenhum
+										@endif
+									</span>
 									<span class="caret"></span>
 								</span>
 							</a>
@@ -181,12 +211,22 @@
 								<p>Home</p>
 							</a>
 						</li>
+
+						@if(Auth::check())
 						<li class="nav-item">
 							<a href="/estudantes/">
 								<i class="la la-table"></i>
 								<p>Estudantes</p>
 							</a>
 						</li>
+
+						<li class="nav-item">
+							<a href="/servicos/">
+								<i class="la la-cogs"></i>
+								<p>Serviços</p>
+							</a>
+						</li>
+
 						<li class="nav-item">
 							<a href="/contas/">
 								<i class="la la-keyboard-o"></i>
@@ -211,7 +251,7 @@
 								<p>Sobre</p>
 							</a>
 						</li>
-					
+					@endif
 					</ul>
 				</div>
 			</div>

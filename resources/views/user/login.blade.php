@@ -19,10 +19,10 @@
                     @csrf
 
             <div class="form-group">
-                <label for="email">E-mail</label>
-               {{Form::email('email', null, ['class'=>"form-control", 'placeholder'=>"E-mail"])}}
-               @if($errors->has('email'))
-               <span class="text-danger">{{$errors->first('email')}}</span>
+                <label for="username">Nome de Usuário</label>
+               {{Form::email('username', null, ['class'=>"form-control", 'placeholder'=>"Nome de Usuário"])}}
+               @if($errors->has('username'))
+               <span class="text-danger">{{$errors->first('username')}}</span>
                 @endif
             </div>
             <div class="form-group">

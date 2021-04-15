@@ -11,7 +11,7 @@ class UsuarioSeeder extends Seeder
         DB::table('usuarios')->insert([
             [
                 'id_pessoa' => 1,
-                'email' => "nic340k@gmail.com",
+                'username' => "nicolau-np",
                 'password' => Hash::make("olaola"),
                 'estado' => "on",
                 'acesso' => "estudante",
@@ -22,7 +22,7 @@ class UsuarioSeeder extends Seeder
 
             [
                 'id_pessoa' => 2,
-                'email' => "html@gmail.com",
+                'username' => "banco",
                 'password' => Hash::make("baba20"),
                 'estado' => "on",
                 'acesso' => "admin",

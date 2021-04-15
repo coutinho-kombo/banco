@@ -13,7 +13,7 @@ class PessoaSeeder extends Seeder
         ],
         [
             'id_municipio'=>2,
-            'nome'=>"Bênção CQ Admin",
+            'nome'=>"Banco Admin",
             'genero'=>"M"
         ],
     ];

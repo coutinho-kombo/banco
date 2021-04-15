@@ -11,12 +11,12 @@ class UserController extends Controller
     {
         $request->validate(
             [
-                'email' => ['required', 'string', 'email', 'max:255'],
+                'username' => ['required', 'string', 'email', 'max:255'],
                 'password' => ['required', 'string', 'min:6', 'max:255']
             ]
         );
 
-        $credencials = array_merge($request->only('email', 'password'), ['is_verified' => 1]);
+        $credencials = array_merge($request->only('username', 'password'), ['is_verified' => 1]);
         if (Auth::attempt($credencials)) {
             return redirect()->route('home');
         } else {
