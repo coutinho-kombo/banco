@@ -16,8 +16,8 @@
 	<div class="wrapper">
 		<div class="main-header">
 			<div class="logo-header">
-				<a href="index.html" class="logo">
-					Ready Dashboard
+				<a href="/" class="logo">
+					Banco Estudantil
 				</a>
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -44,7 +44,8 @@
 								Entrar
 							</a>
                         </li>
-                        @endif
+						@endif
+
 						<li class="nav-item dropdown hidden-caret">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="la la-bell"></i>
@@ -76,7 +77,7 @@
 										</a>
 										<a href="#">
 											<div class="notif-img"> 
-												<img src="{{asset('assets/img/profile2.jpg')}}" alt="Img Profile">
+												<img src="assets/img/profile2.jpg" alt="Img Profile">
 											</div>
 											<div class="notif-content">
 												<span class="block">
@@ -101,28 +102,35 @@
 								</li>
 							</ul>
 						</li>
+						
+						@if(Auth::check())
 						<li class="nav-item dropdown">
-							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="{{asset('assets/img/profile.jpg')}}" alt="user-img" width="36" class="img-circle"><span >Hizrian</span></span> </a>
+						<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="
+						@if(Auth::user()->pessoa->foto=="") https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png 
+						@else {{Auth::user()->pessoa->foto}} @endif" alt="{{Auth::user()->pessoa->nome}}" width="36" class="img-circle"><span >{{Auth::user()->pessoa->nome}}</span></span> </a>
 							<ul class="dropdown-menu dropdown-user">
 								<li>
 									<div class="user-box">
-										<div class="u-img"><img src="{{asset('assets/img/profile.jpg')}}" alt="user"></div>
+										<div class="u-img"><img src="
+											@if(Auth::user()->pessoa->foto=="") https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png 
+										@else {{Auth::user()->pessoa->foto}} @endif" alt="{{Auth::user()->pessoa->nome}}"></div>
 										<div class="u-text">
-											<h4>Hizrian</h4>
-											<p class="text-muted">hello@themekita.com</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+										<h4>{{Auth::user()->pessoa->nome}}</h4>
+										<p class="text-muted">{{Auth::user()->email}}</p><a href="/perfil" class="btn btn-rounded btn-danger btn-sm">Ver Perfil</a></div>
 										</div>
 									</li>
 									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="#"><i class="ti-user"></i> My Profile</a>
-									<a class="dropdown-item" href="#"></i> My Balance</a>
-									<a class="dropdown-item" href="#"><i class="ti-email"></i> Inbox</a>
+									<a class="dropdown-item" href="#"><i class="ti-user"></i> Meu Perfil</a>
+									<a class="dropdown-item" href="#"><i class="ti-email"></i> Entrada</a>
 									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="#"><i class="ti-settings"></i> Account Setting</a>
+									<a class="dropdown-item" href="#"><i class="ti-settings"></i> Definições de Conta</a>
 									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="#"><i class="fa fa-power-off"></i> Logout</a>
+								<a class="dropdown-item" href="{{route('logout')}}"><i class="fa fa-power-off"></i> Terminar Sessão</a>
 								</ul>
 								<!-- /.dropdown-user -->
 							</li>
+
+							@endif
 						</ul>
 					</div>
 				</nav>
@@ -131,13 +139,15 @@
 				<div class="scrollbar-inner sidebar-wrapper">
 					<div class="user">
 						<div class="photo">
-							<img src="{{asset('assets/img/profile.jpg')}}">
+							<img src="
+							@if(Auth::user()->pessoa->foto=="") https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png 
+							@else {{Auth::user()->pessoa->foto}} @endif">
 						</div>
 						<div class="info">
 							<a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
 								<span>
-									Hizrian
-									<span class="user-level">Administrator</span>
+									{{Auth::user()->pessoa->nome}}
+									<span class="user-level">{{Auth::user()->acesso}}</span>
 									<span class="caret"></span>
 								</span>
 							</a>
@@ -147,17 +157,17 @@
 								<ul class="nav">
 									<li>
 										<a href="#profile">
-											<span class="link-collapse">My Profile</span>
+											<span class="link-collapse">Meu Perfil</span>
 										</a>
 									</li>
 									<li>
 										<a href="#edit">
-											<span class="link-collapse">Edit Profile</span>
+											<span class="link-collapse">Editar Perfil</span>
 										</a>
 									</li>
 									<li>
 										<a href="#settings">
-											<span class="link-collapse">Settings</span>
+											<span class="link-collapse">Configurações</span>
 										</a>
 									</li>
 								</ul>
@@ -166,45 +176,39 @@
 					</div>
 					<ul class="nav">
 						<li class="nav-item active">
-							<a href="index.html">
-								<i class="la la-dashboard"></i>
+							<a href="/">
+								<i class="la la-home"></i>
 								<p>Home</p>
-								<span class="badge badge-count">5</span>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="components.html">
+							<a href="/estudantes/">
 								<i class="la la-table"></i>
 								<p>Estudantes</p>
-								<span class="badge badge-count">14</span>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="forms.html">
+							<a href="/contas/">
 								<i class="la la-keyboard-o"></i>
 								<p>Contas</p>
-								<span class="badge badge-count">50</span>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="tables.html">
+							<a href="/movimentos/">
 								<i class="la la-th"></i>
 								<p>Movimentos</p>
-								<span class="badge badge-count">6</span>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="notifications.html">
+							<a href="/extras/">
 								<i class="la la-bell"></i>
 								<p>Extras</p>
-								<span class="badge badge-success">3</span>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="typography.html">
+							<a href="/sobre/">
 								<i class="la la-font"></i>
 								<p>Sobre</p>
-								<span class="badge badge-danger">25</span>
 							</a>
 						</li>
 					
@@ -214,7 +218,7 @@
 			<div class="main-panel">
 				<div class="content">
 					<div class="container-fluid">
-						<h4 class="page-title">Dashboard</h4>
+					<h4 class="page-title">{{$menu}}</h4>
                     
                         @yield('content')
 					</div>
@@ -225,23 +229,23 @@
 							<ul class="nav">
 								<li class="nav-item">
 									<a class="nav-link" href="http://www.themekita.com">
-										ThemeKita
+										Tema
 									</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" href="#">
-										Help
+										Ajuda
 									</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" href="https://themewagon.com/license/#free-item">
-										Licenses
+										Licença
 									</a>
 								</li>
 							</ul>
 						</nav>
 						<div class="copyright ml-auto">
-							2018, made with <i class="la la-heart heart text-danger"></i> by <a href="http://www.themekita.com">ThemeKita</a>
+							{{date('Y')}}, Made With <i class="la la-heart heart text-danger"></i> by <a href="#">Coutinho Kombo</a>
 						</div>				
 					</div>
 				</footer>
