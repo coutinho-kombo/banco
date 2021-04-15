@@ -106,7 +106,7 @@ class UserController extends Controller
         ];
 
         $data['person'] = [
-            'id_municipio' => $request->id_municipio,
+            'id_municipio' => $request->municipio,
             'nome' => $request->nome,
             'data_nascimento' => $request->data,
             'genero' => $request->genero,
@@ -131,7 +131,7 @@ class UserController extends Controller
 
         $person = Pessoa::create($data['person']);
         if($person){
-            $data['person']['id_pessoa'] = $person->id;
+            $data['user']['id_pessoa'] = $person->id;
             $user = User::create($data['user']);
             if($user){
                 $data['count']['id_usuario']=$user->id;
