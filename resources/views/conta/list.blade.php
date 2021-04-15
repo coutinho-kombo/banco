@@ -29,7 +29,7 @@
                             <td>{{number_format($contas->valor_existente, 2,',','.')}}</td>
                             <td>{{$contas->estado}}</td>
                             <td>
-                                <a href="/contas/edit/{{$contas->id}}" class="btn btn-primary btn-sm">Editar</a>
+                                <a href="/contas/deposito/{{$contas->id}}" class="btn btn-warning btn-sm">Depósito</a>
                                &nbsp;&nbsp; 
                                <a href="/contas/delete/{{$contas->id}}" class="btn btn-danger btn-sm">Eliminar</a>
                             </td>

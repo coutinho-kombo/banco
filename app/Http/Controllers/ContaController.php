@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Conta;
+use App\Movimento;
 use Illuminate\Http\Request;
 
 class ContaController extends Controller
@@ -89,5 +90,48 @@ class ContaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function deposito($id){
+        $conta = Conta::find($id);
+        if(!$conta){
+            return back()->with(['error'=>"Nao encontrou"]);
+        }
+
+        $data = [
+            'title' => "Contas",
+            'type' => "contas",
+            'menu' => "Contas",
+            'submenu' => "Depósito",
+            'getConta'=>$conta,
+        ];
+        return view('conta.deposito', $data);
+    }
+
+    public function depositar(Request $request, $id){
+        $conta = Conta::find($id);
+        if(!$conta){
+            return back()->with(['error'=>"Nao encontrou"]);
+        }
+
+        $request->validate([
+            'valor'=>['required', 'numeric', 'min:0'],
+        ]);
+
+        $data['movimentos'] = [
+            'id_conta'=>$conta->id,
+            'tipo'=>"Crédito",
+            'descricao'=>"Depósito de um valor",
+            'valor'=>$request->valor,
+            'estado'=>"on",
+        ];
+
+
+        if(Conta::find($id)->increment('valor_existente', $request->valor)){
+            if(Movimento::create($data['movimentos'])){
+                return back()->with(['success'=>"Feito com sucesso"]);
+            }
+        }
+        
     }
 }
