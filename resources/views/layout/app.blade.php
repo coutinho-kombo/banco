@@ -133,12 +133,7 @@
 											{{Auth::user()->username}}
 											@endif
 										</p>
-										@if (Auth::user()->acesso=="admin")
 										<a href="/perfil" class="btn btn-rounded btn-danger btn-sm">Ver Perfil</a>
-										@else
-										{{Auth::user()->conta}}
-										
-										@endif
 										</div>
 										</div>
 									</li>
@@ -213,7 +208,7 @@
 						</div>
 					</div>
 					<ul class="nav">
-						<li class="nav-item active">
+						<li class="nav-item @if($menu=="Home") active @endif">
 							<a href="/">
 								<i class="la la-home"></i>
 								<p>Home</p>
@@ -222,40 +217,40 @@
 
 						@if(Auth::check())
 							@if(Auth::user()->acesso=="admin")
-						<li class="nav-item">
+						<li class="nav-item @if($menu=="Estudantes") active @endif">
 							<a href="/estudantes/">
 								<i class="la la-table"></i>
 								<p>Estudantes</p>
 							</a>
 						</li>
 
-						<li class="nav-item">
+						<li class="nav-item @if($menu=="Serviços") active @endif">
 							<a href="/servicos/">
 								<i class="la la-cogs"></i>
 								<p>Serviços</p>
 							</a>
 						</li>
 
-						<li class="nav-item">
+						<li class="nav-item @if($menu=="Contas") active @endif">
 							<a href="/contas/">
 								<i class="la la-keyboard-o"></i>
 								<p>Contas</p>
 							</a>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item @if($menu=="Movimentos") active @endif">
 							<a href="/movimentos/">
 								<i class="la la-th"></i>
 								<p>Movimentos</p>
 							</a>
 						</li>
 						@endif
-						<li class="nav-item">
+						<li class="nav-item @if($menu=="Extras") active @endif">
 							<a href="/extras/">
 								<i class="la la-bell"></i>
 								<p>Extras</p>
 							</a>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item @if($menu=="Sobre") active @endif">
 							<a href="/sobre/">
 								<i class="la la-font"></i>
 								<p>Sobre</p>

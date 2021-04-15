@@ -33,6 +33,15 @@ Route::group(['prefix' => "estudantes", 'middleware' => "adminAuth"], function (
     Route::put('/update/{id}', "EstudanteController@update");
 });
 
+Route::group(['prefix' => "servicos", 'middleware' => "adminAuth"], function () {
+    Route::get('/', "ServicoController@index");
+    Route::get('/create', "ServicoController@create");
+    Route::get('/show/{id}', "ServicoController@show");
+    Route::get('/edit/{id}', "ServicoController@edit");
+    Route::post('/store', "ServicoController@store");
+    Route::put('/update/{id}', "ServicoController@update");
+});
+
 /*ajax request*/
 Route::group(['prefix' => "ajax"], function () {
     Route::post('getMunicipios', "AjaxRequestController@getMunicipios")->name('getMunicipios');
