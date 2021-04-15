@@ -45,6 +45,7 @@
                  <div class="buttonLogin">
                      <button class="btn btn-primary">Entrar</button>
                      &nbsp;&nbsp;&nbsp;
+                     <a href="/user/create">Criar uma Conta</a>
                  </div>
             </div>
            
