@@ -59,7 +59,7 @@ Route::group(['prefix' => "pagamentos", 'middleware' => "estudanteAuth"], functi
     Route::get('/create/{id}', "PagamentoController@create");
     Route::get('/show/{id}', "PagamentoController@show");
     Route::get('/edit/{id}', "PagamentoController@edit");
-    Route::post('/store', "PagamentoController@store");
+    Route::put('/store/{id}', "PagamentoController@store");
     Route::put('/update/{id}', "PagamentoController@update");
 });
 

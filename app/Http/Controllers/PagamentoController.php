@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Conta;
+use App\Movimento;
 use App\Servico;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PagamentoController extends Controller
 {
@@ -14,13 +17,13 @@ class PagamentoController extends Controller
      */
     public function index()
     {
-        $servicos= Servico::where(['estado'=>"on"])->get();
+        $servicos = Servico::where(['estado' => "on"])->get();
         $data = [
             'title' => "Pagamentos",
             'type' => "pagamentos",
             'menu' => "Pagamentos",
             'submenu' => "Listar",
-            'getServicos'=>$servicos,
+            'getServicos' => $servicos,
         ];
         return view('pagamentos.list', $data);
     }
@@ -33,8 +36,8 @@ class PagamentoController extends Controller
     public function create($id)
     {
         $servico = Servico::find($id);
-        if(!$servico){
-            return back()->with(['error'=>"Não encontrou serviço"]);
+        if (!$servico) {
+            return back()->with(['error' => "Não encontrou serviço"]);
         }
 
         $data = [
@@ -42,6 +45,8 @@ class PagamentoController extends Controller
             'type' => "pagamentos",
             'menu' => "Pagamentos",
             'submenu' => "Novo",
+            'getServico' => $servico,
+
         ];
 
         return view('pagamentos.create', $data);
@@ -53,9 +58,40 @@ class PagamentoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        $servico = Servico::find($id);
+        if (!$servico) {
+            return back()->with(['error' => "Não encontrou serviço"]);
+        }
+
+        $conta = Conta::where(['id_usuario' => Auth::user()->id])->first();
+
+        $request->validate([
+            'descricao' => ['required', 'min:10', 'max:40'],
+            'valor' => ['required', 'numeric', 'min:1'],
+        ]);
+
+
+        $data = [
+            'id_conta' => $conta->id,
+            'tipo' => "Pagamento Serviço",
+            'descricao' => $request->descricao . " || " . $servico->servico,
+            'valor' => $request->valor,
+            'estado' => "on",
+        ];
+
+        if ($servico->valor > $conta->valor_existente) {
+            return back()->with(['error' => "Saldo insuficiente para completar a Operação: " . (number_format($conta->valor_existente, 2, ',', '.')) . "Akz"]);
+        }
+
+        if ($request->valor > $conta->valor_existente) {
+            return back()->with(['error' => "Saldo insuficiente para completar a Operação: " . (number_format($conta->valor_existente, 2, ',', '.')) . "Akz"]);
+        }
+
+        if (Movimento::create($data)) {
+            return back()->with(['success' => "Feito com sucesso"]);
+        }
     }
 
     /**
