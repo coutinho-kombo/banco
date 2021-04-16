@@ -7,6 +7,7 @@ use App\Movimento;
 use App\Servico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class PagamentoController extends Controller
 {
@@ -70,6 +71,7 @@ class PagamentoController extends Controller
         $request->validate([
             'descricao' => ['required', 'min:10', 'max:40'],
             'valor' => ['required', 'numeric', 'min:1'],
+            'password' => ['required', 'string']
         ]);
 
 
@@ -89,8 +91,14 @@ class PagamentoController extends Controller
             return back()->with(['error' => "Saldo insuficiente para completar a Operação: " . (number_format($conta->valor_existente, 2, ',', '.')) . "Akz"]);
         }
 
-        if (Movimento::create($data)) {
-            return back()->with(['success' => "Feito com sucesso"]);
+        if (Hash::check($request->password, Auth::user()->password)) {
+            if (Conta::find($id)->decrement('valor_existente', $request->valor)) {
+                if (Movimento::create($data)) {
+                    return back()->with(['success' => "Feito com sucesso"]);
+                }
+            }
+        } else {
+            return back()->with(['error' => "Palavra-Passe incorrecta"]);
         }
     }
 

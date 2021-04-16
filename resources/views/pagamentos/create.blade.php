@@ -32,12 +32,22 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="valor">Valor à Pagar</label> <span class="text-danger">*</span>
                                {{Form::text('valor', null, ['class'=>"form-control", 'placeholder'=>"Valor à Pagar"])}}
                                @if($errors->has('valor'))
                                <span class="text-danger">{{$errors->first('valor')}}</span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="password">Palavra-Passe</label> <span class="text-danger">*</span>
+                                <input type="password" name="password" class="form-control" placeholder="Palavra-Passe">
+                                @if($errors->has('password'))
+                                <span class="text-danger">{{$errors->first('password')}}</span>
                                 @endif
                             </div>
                         </div>
