@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             UsuarioSeeder::class,
             ContaSeeder::class,
             ModoPagamentoSeeder::class,
+            DescontoSeeder::class,
         ]);
     }
 }

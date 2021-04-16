@@ -15,4 +15,8 @@ class ModoPagamento extends Model
     public function servico(){
         return $this->hasMany(Servico::class, 'id_modo', 'id');
     }
+
+    public function desconto(){
+        return $this->hasMany(Desconto::class, 'id_modo', 'id');
+    }
 }

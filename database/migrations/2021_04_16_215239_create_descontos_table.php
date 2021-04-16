@@ -14,8 +14,16 @@ class CreateDescontosTable extends Migration
     public function up()
     {
         Schema::create('descontos', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->bigInteger('id_modo')->unsigned()->index();
+            $table->string('desconto')->unique();
+            $table->decimal('preco', 12,2);
+            $table->string('estado');
             $table->timestamps();
+        });
+
+        Schema::table('descontos', function (Blueprint $table) {
+            $table->foreign('id_modo')->references('id')->on('modo_pagamentos')->onUpdate('cascade');
         });
     }
 
