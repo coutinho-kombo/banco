@@ -54,10 +54,19 @@ Route::group(['prefix' => "contas", 'middleware' => "adminAuth"], function () {
     
 });
 
+Route::group(['prefix' => "pagamentos", 'middleware' => "estudanteAuth"], function () {
+    Route::get('/', "PagamentoController@index");
+    Route::get('/create', "PagamentoController@create");
+    Route::get('/show/{id}', "PagamentoController@show");
+    Route::get('/edit/{id}', "PagamentoController@edit");
+    Route::post('/store', "PagamentoController@store");
+    Route::put('/update/{id}', "PagamentoController@update");
+});
+
 Route::get('/contas/movimentos/{id}', "ContaController@movimentos")->middleware('auth');
 
 /*ajax request*/
 Route::group(['prefix' => "ajax"], function () {
     Route::post('getMunicipios', "AjaxRequestController@getMunicipios")->name('getMunicipios');
     
-  });
+});

@@ -27,12 +27,17 @@
                             <td>{{date('d-m-Y H:i', strtotime($movimentos->created_at))}}</td>
                             <td>{{$movimentos->tipo}}</td>
                             <td>{{$movimentos->descricao}}</td>
-                            <td>{{number_format($movimentos->valor, 2,',','.')}}</td>
+                            <td>
+                            @if ($movimentos->tipo=="Crédito")
+                                +
+                            @elseif($movimentos->tipo=="Débito")
+                                -
+                            @endif
+                            {{number_format($movimentos->valor, 2,',','.')}}</td>
                             <td>{{$movimentos->estado}}</td>
                            
                             </tr>
-                       
-                        
+                      
                        @endforeach
                     </tbody>
                 </table>
