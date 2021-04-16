@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Servico;
 use Illuminate\Http\Request;
 
 class PagamentoController extends Controller
@@ -13,7 +14,15 @@ class PagamentoController extends Controller
      */
     public function index()
     {
-        //
+        $servicos= Servico::where(['estado'=>"on"])->get();
+        $data = [
+            'title' => "Pagamentos",
+            'type' => "pagamentos",
+            'menu' => "Pagamentos",
+            'submenu' => "Listar",
+            'getServicos'=>$servicos,
+        ];
+        return view('pagamentos.list', $data);
     }
 
     /**
@@ -21,9 +30,21 @@ class PagamentoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $servico = Servico::find($id);
+        if(!$servico){
+            return back()->with(['error'=>"Não encontrou serviço"]);
+        }
+
+        $data = [
+            'title' => "Pagamentos",
+            'type' => "pagamentos",
+            'menu' => "Pagamentos",
+            'submenu' => "Novo",
+        ];
+
+        return view('pagamentos.create', $data);
     }
 
     /**
