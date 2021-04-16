@@ -47,7 +47,13 @@ class TransferenciaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+           'conta'=>['required', 'string'],
+           'valor'=>['required', 'numeric', 'min:1'],
+           'password'=>['required', 'string'], 
+        ]);
+
+        
     }
 
     /**

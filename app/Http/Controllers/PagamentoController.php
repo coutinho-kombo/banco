@@ -67,6 +67,9 @@ class PagamentoController extends Controller
         }
 
         $conta = Conta::where(['id_usuario' => Auth::user()->id])->first();
+        if(!$conta){
+            return back()->with(['error'=>"Conta nao encontrada"]);
+        }
 
         $request->validate([
             'descricao' => ['required', 'min:10', 'max:40'],

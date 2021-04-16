@@ -68,7 +68,7 @@ Route::group(['prefix' => "transferencias", 'middleware' => "estudanteAuth"], fu
     Route::get('/create/{id}', "TransferenciaController@create");
     Route::get('/show/{id}', "TransferenciaController@show");
     Route::get('/edit/{id}', "TransferenciaController@edit");
-    Route::post('/store/{id}', "TransferenciaController@store");
+    Route::post('/store', "TransferenciaController@store");
     Route::put('/update/{id}', "TransferenciaController@update");
 });
 
