@@ -18,16 +18,16 @@
                 @if (session('success'))
                 <div class="alert bg-success" role="alert"><em class="fa fa-lg fa-check">&nbsp;</em> {{session('success')}} <a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a></div>
                  @endif
-                {{Form::open(['method'=>"post", 'name'=>"formServico", 'url'=>"/servicos/store"])}}
+                {{Form::open(['method'=>"post", 'name'=>"formDesconto", 'url'=>"/descontos/store"])}}
                 @csrf
 
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="servico">Serviço</label> <span class="text-danger">*</span>
-                               {{Form::text('servico', null, ['class'=>"form-control", 'placeholder'=>"Serviço"])}}
-                               @if($errors->has('servico'))
-                               <span class="text-danger">{{$errors->first('servico')}}</span>
+                                <label for="desconto">Desconto</label> <span class="text-danger">*</span>
+                               {{Form::text('desconto', null, ['class'=>"form-control", 'placeholder'=>"Desconto"])}}
+                               @if($errors->has('desconto'))
+                               <span class="text-danger">{{$errors->first('desconto')}}</span>
                                 @endif
                             </div>
                         </div>

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Desconto;
+use App\ModoPagamento;
 use Illuminate\Http\Request;
 
 class DescontosController extends Controller
@@ -13,7 +15,15 @@ class DescontosController extends Controller
      */
     public function index()
     {
-        //
+        $descontos = Desconto::paginate(5);
+        $data = [
+            'title' => "Descontos",
+            'type' => "descontos",
+            'menu' => "Descontos",
+            'submenu' => "Listar",
+            'getDescontos' => $descontos,
+        ];
+        return view('descontos.list', $data);
     }
 
     /**
@@ -23,7 +33,15 @@ class DescontosController extends Controller
      */
     public function create()
     {
-        //
+        $modo_pagamento = ModoPagamento::pluck('modo', 'id');
+        $data = [
+            'title' => "Descontos",
+            'type' => "descontos",
+            'menu' => "Descontos",
+            'submenu' => "Novo",
+            'getModoPagamento' => $modo_pagamento,
+        ];
+        return view('descontos.create', $data);
     }
 
     /**
@@ -34,7 +52,23 @@ class DescontosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'desconto' => ['required', 'string', 'min:10', 'max:255', 'unique:descontos,desconto'],
+            'valor' => ['required', 'numeric', 'min:1'],
+            'estado' => ['required', 'string', 'min:1', 'max:3'],
+            'modo' => ['required', 'integer']
+        ]);
+
+        $data = [
+            'id_modo' => $request->modo,
+            'desconto' => $request->desconto,
+            'preco' => $request->valor,
+            'estado' => $request->estado,
+        ];
+
+        if(Desconto::create($data)){
+            return back()->with(['success'=>"Feito com sucesso"]);
+        }
     }
 
     /**
@@ -56,7 +90,21 @@ class DescontosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $desconto = Desconto::find($id);
+        if(!$desconto){
+            return back()->with(['error'=>"Nao encontrou desconto"]);
+        }
+
+        $modo_pagamento = ModoPagamento::pluck('modo', 'id');
+        $data = [
+            'title' => "Descontos",
+            'type' => "descontos",
+            'menu' => "Descontos",
+            'submenu' => "Novo",
+            'getModoPagamento' => $modo_pagamento,
+            'getDesconto'=>$desconto,
+        ];
+        return view('descontos.edit', $data);
     }
 
     /**
@@ -68,7 +116,28 @@ class DescontosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $desconto = Desconto::find($id);
+        if(!$desconto){
+            return back()->with(['error'=>"Nao encontrou desconto"]);
+        }
+
+        $request->validate([
+            'desconto' => ['required', 'string', 'min:10', 'max:255'],
+            'valor' => ['required', 'numeric', 'min:1'],
+            'estado' => ['required', 'string', 'min:1', 'max:3'],
+            'modo' => ['required', 'integer']
+        ]);
+
+        $data = [
+            'id_modo' => $request->modo,
+            'desconto' => $request->desconto,
+            'preco' => $request->valor,
+            'estado' => $request->estado,
+        ];
+
+        if(Desconto::find($id)->update($data)){
+            return back()->with(['success'=>"Feito com sucesso"]);
+        }
     }
 
     /**

@@ -76,7 +76,7 @@ Route::group(['prefix' => "transferencias", 'middleware' => "estudanteAuth"], fu
 
 Route::group(['prefix'=>"descontos", 'middleware'=>"adminAuth"], function(){
     Route::get('/', "DescontosController@index");
-    Route::get('/create/{id}', "DescontosController@create");
+    Route::get('/create', "DescontosController@create");
     Route::get('/show/{id}', "DescontosController@show");
     Route::get('/edit/{id}', "DescontosController@edit");
     Route::post('/store', "DescontosController@store");
