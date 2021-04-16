@@ -63,6 +63,15 @@ Route::group(['prefix' => "pagamentos", 'middleware' => "estudanteAuth"], functi
     Route::put('/update/{id}', "PagamentoController@update");
 });
 
+Route::group(['prefix' => "transferencias", 'middleware' => "estudanteAuth"], function () {
+    Route::get('/', "TransferenciaController@index");
+    Route::get('/create/{id}', "TransferenciaController@create");
+    Route::get('/show/{id}', "TransferenciaController@show");
+    Route::get('/edit/{id}', "TransferenciaController@edit");
+    Route::post('/store/{id}', "TransferenciaController@store");
+    Route::put('/update/{id}', "TransferenciaController@update");
+});
+
 Route::get('/contas/movimentos/{id}', "ContaController@movimentos")->middleware('auth');
 
 /*ajax request*/

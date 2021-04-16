@@ -219,8 +219,15 @@
 						@if (Auth::user()->acesso=="estudante")
 						<li class="nav-item @if($menu=="Pagamentos") active @endif">
 							<a href="/pagamentos/">
-								<i class="la la-table"></i>
+								<i class="la la-money"></i>
 								<p>Pagamento</p>
+							</a>
+						</li>
+
+						<li class="nav-item @if($menu=="Transferência") active @endif">
+							<a href="/transferencias/">
+								<i class="la la-tags"></i>
+								<p>Transferência</p>
 							</a>
 						</li>
 						@endif
@@ -230,7 +237,7 @@
 							@if(Auth::user()->acesso=="admin")
 						<li class="nav-item @if($menu=="Estudantes") active @endif">
 							<a href="/estudantes/">
-								<i class="la la-table"></i>
+								<i class="la la-list"></i>
 								<p>Estudantes</p>
 							</a>
 						</li>
