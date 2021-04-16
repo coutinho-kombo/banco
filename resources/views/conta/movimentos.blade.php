@@ -4,7 +4,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-            <div class="card-title">{{$submenu}} &nbsp;&nbsp;&nbsp;&nbsp;<a href="#">{{$getConta->usuario->pessoa->nome}} - {{$getConta->conta}}</a> <span class="text-danger">{{number_format($getConta->valor_existente,2,',','.')}}</span></div>
+            <div class="card-title">{{$submenu}} &nbsp;&nbsp;&nbsp;&nbsp;<a href="#">{{$getConta->usuario->pessoa->nome}} &nbsp;&nbsp; {{$getConta->conta}}  &nbsp;&nbsp;  <span class="text-danger">{{number_format($getConta->valor_existente,2,',','.')}} Akz</span></a> </div>
             </div>
             <div class="card-body">
                 <div class="card-sub">									
@@ -17,10 +17,11 @@
                             <th scope="col">Tipo</th>
                             <th scope="col">Detalhes</th>
                             <th scope="col">Valor</th>
+                            <th scope="col">Estado</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($getContas->movimento as $movimentos)
+                        @foreach ($getConta->movimento as $movimentos)
                        
                         <tr>
                             <td>{{date('d-m-Y H:i', strtotime($movimentos->created_at))}}</td>

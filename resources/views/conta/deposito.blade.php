@@ -4,7 +4,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-            <div class="card-title">{{$submenu}} &nbsp;&nbsp;&nbsp;&nbsp;<a href="#">{{$getConta->usuario->pessoa->nome}} - {{$getConta->conta}} - <span class="text-danger">{{number_format($getConta->valor_existente, 2,',','.')}} Akz</span></a></div>
+            <div class="card-title">{{$submenu}} &nbsp;&nbsp;&nbsp;&nbsp;<a href="#">{{$getConta->usuario->pessoa->nome}} &nbsp;&nbsp; {{$getConta->conta}} &nbsp;&nbsp; <span class="text-danger">{{number_format($getConta->valor_existente, 2,',','.')}} Akz</span></a></div>
             </div>
             <div class="card-body">
                 <div class="card-sub">									
@@ -18,7 +18,7 @@
                 @if (session('success'))
                 <div class="alert bg-success" role="alert"><em class="fa fa-lg fa-check">&nbsp;</em> {{session('success')}} <a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a></div>
                  @endif
-                 
+
                 {{Form::open(['method'=>"put", 'name'=>"formDeposito", 'url'=>"/contas/depositar/{$getConta->id}"])}}
                 @csrf
 
