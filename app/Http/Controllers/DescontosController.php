@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Conta;
 use App\Desconto;
 use App\ModoPagamento;
+use App\Movimento;
 use Illuminate\Http\Request;
 
 class DescontosController extends Controller
@@ -149,5 +151,57 @@ class DescontosController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function cobranca($id){
+        $desconto = Desconto::find($id);
+        if(!$desconto){
+            return back()->with(['error'=>"Nao encontrou"]);
+        }
+
+        $data = [
+            'title' => "Descontos",
+            'type' => "descontos",
+            'menu' => "Descontos",
+            'submenu' => "Cobranças",
+            'getDesconto'=>$desconto,
+        ];
+        return view('descontos.cobranca', $data);
+    }
+
+    public function cobrar(Request $request, $id){
+        $desconto = Desconto::find($id);
+        if(!$desconto){
+            return back()->with(['error'=>"Nao encontrou"]);
+        }
+
+        $request->validate([
+            'estado'=>['required', 'string', 'min:1', 'max:3'],
+        ]);
+
+        $data = [
+            'valor_desconto'=>$desconto->preco,
+            'id_conta'=>null,
+        ];
+
+        $data2 = [
+            'id_conta'=>null,
+            'tipo'=>"Desconto",
+            'descricao'=>$desconto->desconto,
+            'valor'=>$desconto->preco,
+            'estado'=>"on",
+        ];
+        
+        $contas = Conta::where(['estado'=>$request->estado])->get();
+        foreach($contas as $conta){
+            $data['id_conta']=$conta->id;
+            $data2['id_conta']=$conta->id;
+            if(Conta::find($id)->decrement('valor_existente', $desconto->preco)){
+                if(Movimento::create($data2)){
+                    return back()->with(['success'=>"Feito com sucesso"]);
+                }
+            }
+           
+        }
     }
 }

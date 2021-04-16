@@ -81,6 +81,8 @@ Route::group(['prefix'=>"descontos", 'middleware'=>"adminAuth"], function(){
     Route::get('/edit/{id}', "DescontosController@edit");
     Route::post('/store', "DescontosController@store");
     Route::put('/update/{id}', "DescontosController@update"); 
+    Route::get('/cobranca/{id}', "DescontosController@cobranca");
+    Route::put('/cobrar/{id}', "DescontosController@cobrar");
 });
 
 Route::get('/contas/movimentos/{id}', "ContaController@movimentos")->middleware('auth');
