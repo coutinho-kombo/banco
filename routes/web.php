@@ -51,6 +51,7 @@ Route::group(['prefix' => "contas", 'middleware' => "adminAuth"], function () {
     Route::put('/update/{id}', "ContaController@update");
     Route::get('/deposito/{id}', "ContaController@deposito");
     Route::put('/depositar/{id}', "ContaController@depositar");
+    Route::get('/movimentos/{id}', "ContaController@movimentos");
 });
 
 /*ajax request*/

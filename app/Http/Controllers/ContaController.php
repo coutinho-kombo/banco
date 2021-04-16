@@ -134,4 +134,19 @@ class ContaController extends Controller
         }
         
     }
+
+    public function movimentos($id){
+        $conta = Conta::find($id);
+        if(!$conta){
+            return back()->with(['error'=>"Conta não encontrada"]);
+        }
+        $data = [
+            'title' => "Contas",
+            'type' => "contas",
+            'menu' => "Contas",
+            'submenu' => "Movimentos",
+            'getConta'=>$conta,
+        ];
+        return view('conta.movimentos', $data);
+    }
 }

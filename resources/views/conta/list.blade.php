@@ -31,6 +31,8 @@
                             <td>
                                 <a href="/contas/deposito/{{$contas->id}}" class="btn btn-warning btn-sm">Depósito</a>
                                &nbsp;&nbsp; 
+                               <a href="/contas/movimentos/{{$contas->id}}" class="btn btn-info btn-sm">Movimentos</a>
+                               &nbsp;&nbsp; 
                                <a href="/contas/delete/{{$contas->id}}" class="btn btn-danger btn-sm">Eliminar</a>
                             </td>
                             </tr>
