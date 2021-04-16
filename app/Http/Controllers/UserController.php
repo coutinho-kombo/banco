@@ -89,6 +89,7 @@ class UserController extends Controller
             'confirm_password' => ['required', 'string', 'min:6', 'max:255'],
             'termo' => ['required'],
             'termo.*' => ['string'],
+            'ficheiro_bilhete' => ['required', 'mimes:png,jpg,pdf,doc,docx'],
         ]);
 
         if ($request->password != $request->confirm_password) {
@@ -115,30 +116,28 @@ class UserController extends Controller
         ];
 
         $data['count'] = [
-            'id_usuario'=>null,
-            'conta'=>null,
-            'valor_existente'=>0,
-            'estado'=>"on",
+            'id_usuario' => null,
+            'conta' => null,
+            'valor_existente' => 0,
+            'estado' => "on",
+            'ficheiro_bilhete' => null
         ];
 
-        if ($request->hasFile('foto') && $request->foto->isValid()) {
-            $request->validate([
-                'foto' => ['required', 'mimes:jpg,jpeg,png,JPG,JPEG,PNG', 'max:5000']
-            ]);
-            $path = $request->file('foto')->store('img_estudantes');
-            $data['person']['foto'] = $path;
+        if ($request->hasFile('ficheiro_bilhete') && $request->ficheiro_bilhete->isValid()) {
+            $path = $request->file('ficheiro_bilhete')->store('bilhetes');
+            $data['count']['ficheiro_bilhete'] = $path;
         }
 
         $person = Pessoa::create($data['person']);
-        if($person){
+        if ($person) {
             $data['user']['id_pessoa'] = $person->id;
             $user = User::create($data['user']);
-            if($user){
-                $data['count']['id_usuario']=$user->id;
-                $data['count']['conta']=$user->id."00-000".$person->id."BANC";
+            if ($user) {
+                $data['count']['id_usuario'] = $user->id;
+                $data['count']['conta'] = $user->id . "00-000" . $person->id . "BANC";
                 $conta = Conta::create($data['count']);
-                if($conta){
-                    return back()->with(['success'=>"Cadastro feito com sucesso"]);
+                if ($conta) {
+                    return back()->with(['success' => "Cadastro feito com sucesso"]);
                 }
             }
         }

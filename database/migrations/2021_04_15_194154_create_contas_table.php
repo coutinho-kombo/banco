@@ -18,6 +18,7 @@ class CreateContasTable extends Migration
             $table->bigInteger('id_usuario')->unsigned()->index();
             $table->string('conta')->unique();
             $table->decimal('valor_existente', 12,2);
+            $table->text('ficheiro_bilhete')->nullable();
             $table->string('estado');
             $table->timestamps();
         });

@@ -51,11 +51,13 @@
                 @endif
                     </div>
             <br/>
+                   
+
                     <div class="col-md-12">
-                        <label for="foto">Foto</label><br/>
-               {{Form::file('foto', null, ['class'=>"form-control", 'placeholder'=>"Foto"])}}
-               @if($errors->has('foto'))
-               <span class="text-danger">{{$errors->first('foto')}}</span>
+                        <label for="ficheiro_bilhete">Bilhete de Identidade</label> <span class="text-danger">*</span><br/>
+               {{Form::file('ficheiro_bilhete', null, ['class'=>"form-control", 'placeholder'=>"Bilhete de Identidade"])}}
+               @if($errors->has('ficheiro_bilhete'))
+               <span class="text-danger">{{$errors->first('ficheiro_bilhete')}}</span>
                 @endif
                     </div>
 
