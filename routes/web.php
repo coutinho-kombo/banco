@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -79,3 +80,21 @@ Route::group(['prefix' => "ajax"], function () {
     Route::post('getMunicipios', "AjaxRequestController@getMunicipios")->name('getMunicipios');
     
 });
+
+
+/*Route::get('/sms', function(){
+    $data = [
+        'email' => "mr1Normaliii@gmail.com",
+    ];
+    try {
+        Mail::send('email.mail', $data, function ($message) use ($data) {
+            $message->from('coutinho77Kombo@gmail.com', 'Banco BANC');
+            $message->subject('Mudança do preço dos Serviços');
+            $message->to($data['email']);
+        });
+        echo "enviado";
+    } catch (\Exception $e) {
+        echo $e->getMessage();
+    }
+
+});*/
