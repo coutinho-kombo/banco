@@ -149,4 +149,15 @@ class ContaController extends Controller
         ];
         return view('conta.movimentos', $data);
     }
+
+    public function activar($id){
+        $conta = Conta::find($id);
+        if(!$conta){
+            return back()->with(['error'=>"Conta nao encontrada"]);
+        }
+
+        if(Conta::find($id)->update(['estado'=>"on"])){
+            return back()->with(['success'=>"Activada com sucesso"]);
+        }
+    }
 }

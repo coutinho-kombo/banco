@@ -52,6 +52,7 @@ Route::group(['prefix' => "contas", 'middleware' => "adminAuth"], function () {
     Route::put('/update/{id}', "ContaController@update");
     Route::get('/deposito/{id}', "ContaController@deposito");
     Route::put('/depositar/{id}', "ContaController@depositar");
+    Route::get('/activar/{id}', "ContaController@activar");
     
 });
 
@@ -71,6 +72,15 @@ Route::group(['prefix' => "transferencias", 'middleware' => "estudanteAuth"], fu
     Route::get('/edit/{id}', "TransferenciaController@edit");
     Route::post('/store', "TransferenciaController@store");
     Route::put('/update/{id}', "TransferenciaController@update");
+});
+
+Route::group(['prefix'=>"descontos", 'middleware'=>"adminAuth"], function(){
+    Route::get('/', "DescontosController@index");
+    Route::get('/create/{id}', "DescontosController@create");
+    Route::get('/show/{id}', "DescontosController@show");
+    Route::get('/edit/{id}', "DescontosController@edit");
+    Route::post('/store', "DescontosController@store");
+    Route::put('/update/{id}', "DescontosController@update"); 
 });
 
 Route::get('/contas/movimentos/{id}', "ContaController@movimentos")->middleware('auth');

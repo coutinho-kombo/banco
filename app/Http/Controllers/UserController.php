@@ -119,13 +119,21 @@ class UserController extends Controller
             'id_usuario' => null,
             'conta' => null,
             'valor_existente' => 0,
-            'estado' => "on",
+            'estado' => "off",
             'ficheiro_bilhete' => null
         ];
 
         if ($request->hasFile('ficheiro_bilhete') && $request->ficheiro_bilhete->isValid()) {
             $path = $request->file('ficheiro_bilhete')->store('bilhetes');
             $data['count']['ficheiro_bilhete'] = $path;
+        }
+
+        if ($request->hasFile('foto') && $request->foto->isValid()) {
+            $request->validate([
+                'foto' => ['required', 'mimes:jpg,jpeg,png,JPG,JPEG,PNG', 'max:5000']
+            ]);
+            $path = $request->file('foto')->store('img_usuarios');
+            $data['person']['foto'] = $path;
         }
 
         $person = Pessoa::create($data['person']);

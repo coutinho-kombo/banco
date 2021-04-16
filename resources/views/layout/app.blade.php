@@ -255,10 +255,10 @@
 								<p>Contas</p>
 							</a>
 						</li>
-						<li class="nav-item @if($menu=="Movimentos") active @endif">
-							<a href="/movimentos/">
+						<li class="nav-item @if($menu=="Descontos") active @endif">
+							<a href="/descontos/">
 								<i class="la la-th"></i>
-								<p>Movimentos</p>
+								<p>Descontos</p>
 							</a>
 						</li>
 						@endif

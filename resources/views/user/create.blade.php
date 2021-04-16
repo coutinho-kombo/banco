@@ -15,7 +15,7 @@
                     @if (session('success'))
                     <div class="alert bg-success" role="alert"><em class="fa fa-lg fa-check">&nbsp;</em> {{session('success')}} <a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a></div>
                      @endif
-                    {{Form::open(['method'=>"post", 'name'=>"formLogin", 'url'=>"/user/store"])}}
+                    {{Form::open(['method'=>"post", 'name'=>"formLogin", 'url'=>"/user/store", 'files' => true])}}
                     @csrf
             <div class="row">
                 
@@ -58,6 +58,14 @@
                {{Form::file('ficheiro_bilhete', null, ['class'=>"form-control", 'placeholder'=>"Bilhete de Identidade"])}}
                @if($errors->has('ficheiro_bilhete'))
                <span class="text-danger">{{$errors->first('ficheiro_bilhete')}}</span>
+                @endif
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="foto">Foto</label><br/>
+               {{Form::file('foto', null, ['class'=>"form-control", 'placeholder'=>"Foto"])}}
+               @if($errors->has('foto'))
+               <span class="text-danger">{{$errors->first('foto')}}</span>
                 @endif
                     </div>
 
