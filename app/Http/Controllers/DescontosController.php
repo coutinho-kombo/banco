@@ -165,6 +165,7 @@ class DescontosController extends Controller
             'menu' => "Descontos",
             'submenu' => "Cobranças",
             'getDesconto'=>$desconto,
+    
         ];
         return view('descontos.cobranca', $data);
     }
@@ -192,6 +193,6 @@ class DescontosController extends Controller
             'estado'=>"on",
         ];
         
-        echo "helloo";
+        echo "desconto";
     }
 }
