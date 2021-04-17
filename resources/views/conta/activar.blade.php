@@ -8,7 +8,7 @@
             </div>
             <div class="card-body">
                 <div class="card-sub">									
-                    * campos obrigatórios
+                    * Ao activar a conta vai ser descontado um valor referente a Abertura da conta
                 </div>
                <div class="form">
                 @if (session('error'))

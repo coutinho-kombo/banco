@@ -160,14 +160,25 @@ class ContaController extends Controller
         if (!$conta) {
             return back()->with(['error' => "Conta nao encontrada"]);
         }
-
         $desconto = Desconto::find(1);
 
-        if (Conta::find($id)->update(['estado' => "on"])) {
+        $data = [
+            'id_conta'=>$id,
+            'tipo'=>"Desconto",
+            'descricao'=>$desconto->desconto,
+            'valor'=>$desconto->preco,
+            'estado'=>"on",
+        ];
+        $password = Auth::user()->id."".time();
+        if (Conta::find($id)->update(['estado' => "on", 'password'=>$password])) {
             if (Conta::find($id)->decrement('valor_existente', $desconto->preco)) {
-                return back()->with(['success' => "Activada com sucesso"]);
+                if(Movimento::create($data)){
+                    return back()->with(['success' => "Activada com sucesso"]);
+                }
+                
             }
         }
+        
     }
 
     public function activate($id)
