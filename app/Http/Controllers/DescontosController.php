@@ -192,9 +192,20 @@ class DescontosController extends Controller
        $contas = Conta::whereHas('usuario', function($query){
            $query->where('acesso', "estudante");
        })->where(['estado'=>"on"])->get();
-       
+       $status = "off";
        foreach($contas as $conta){
-           echo $conta->usuario->pessoa->nome."<br/>";
+           $data['conta']['id_conta']=$conta->id;
+           $data['movimento']['id_conta']=$conta->id;
+
+           if(Conta::find($data['conta']['id_conta'])->decrement('valor_existente', $data['conta']['valor_existente'])){
+               if(Movimento::create($data['movimento'])){
+                   $status = "on";
+               }
+           }
+       }
+
+       if($status == "on"){
+           return back()->with(['success'=>"Feito com sucesso"]);
        }
         
     }
