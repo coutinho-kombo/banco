@@ -30,7 +30,7 @@
                             <td>{{$contas->estado}}</td>
                             <td>
                                 @if ($contas->estado=="off")
-                                <a href="/contas/activar/{{$contas->id}}" class="btn btn-success btn-sm">Activar</a>
+                                <a href="/contas/activate/{{$contas->id}}" class="btn btn-success btn-sm">Activar</a>
                                 &nbsp;&nbsp; 
                                 @endif
                                 

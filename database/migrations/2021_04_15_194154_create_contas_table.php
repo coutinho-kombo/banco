@@ -19,6 +19,7 @@ class CreateContasTable extends Migration
             $table->string('conta')->unique();
             $table->decimal('valor_existente', 12,2);
             $table->text('ficheiro_bilhete')->nullable();
+            $table->text('password')->nullable();
             $table->string('estado');
             $table->timestamps();
         });

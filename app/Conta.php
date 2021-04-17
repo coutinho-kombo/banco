@@ -14,6 +14,8 @@ class Conta extends Model
         'valor_existente',
         'estado',
         'ficheiro_bilhete',
+        'password',
+        'estado',
     ];
 
     public function usuario(){

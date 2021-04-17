@@ -160,4 +160,19 @@ class ContaController extends Controller
             return back()->with(['success'=>"Activada com sucesso"]);
         }
     }
+
+    public function activate($id){
+        $conta = Conta::find($id);
+        if(!$conta){
+            return back()->with(['error'=>"Conta não encontrada"]);
+        }
+        $data = [
+            'title' => "Contas",
+            'type' => "contas",
+            'menu' => "Contas",
+            'submenu' => "Activar",
+            'getConta'=>$conta,
+        ];
+        return view('conta.activar', $data);
+    }
 }

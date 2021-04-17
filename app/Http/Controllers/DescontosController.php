@@ -196,11 +196,12 @@ class DescontosController extends Controller
         foreach($contas as $conta){
             $data['id_conta']=$conta->id;
             $data2['id_conta']=$conta->id;
-            if(Conta::find($id)->decrement('valor_existente', $desconto->preco)){
+            if(Conta::find($conta->id)->decrement('valor_existente', $desconto->preco)){
                 if(Movimento::create($data2)){
                     return back()->with(['success'=>"Feito com sucesso"]);
                 }
             }
+
            
         }
     }
