@@ -176,23 +176,26 @@ class DescontosController extends Controller
             return back()->with(['error'=>"Nao encontrou"]);
         }
 
-        $request->validate([
-            'estado'=>['required', 'string', 'min:1', 'max:3'],
-        ]);
-
-        $data = [
-            'valor_desconto'=>$desconto->preco,
+        $data['conta'] = [
+            'valor_existente'=>$desconto->preco,
             'id_conta'=>null,
         ];
 
-        $data2 = [
+        $data['movimento'] = [
             'id_conta'=>null,
             'tipo'=>"Desconto",
             'descricao'=>$desconto->desconto,
             'valor'=>$desconto->preco,
             'estado'=>"on",
         ];
+
+       $contas = Conta::whereHas('usuario', function($query){
+           $query->where('acesso', "estudante");
+       })->where(['estado'=>"on"])->get();
+       
+       foreach($contas as $conta){
+           echo $conta->usuario->pessoa->nome."<br/>";
+       }
         
-        echo "desconto";
     }
 }

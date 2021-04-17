@@ -160,6 +160,11 @@ class ContaController extends Controller
         if (!$conta) {
             return back()->with(['error' => "Conta nao encontrada"]);
         }
+
+        if($conta->estado=="on"){
+            return back()->with(['error'=>"Ja activou esta conta"]);
+        }
+        
         $desconto = Desconto::find(1);
 
         $data = [
@@ -237,6 +242,6 @@ class ContaController extends Controller
         if(Conta::find($conta->id)->update(['estado'=>"off", 'password'=>""])){
             return back()->with(['success'=>"Conta Cancelada com sucesso"]);
         }
-        echo "h";
+       
     }
 }

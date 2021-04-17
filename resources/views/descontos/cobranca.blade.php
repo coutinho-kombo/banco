@@ -8,7 +8,7 @@
             </div>
             <div class="card-body">
                 <div class="card-sub">									
-                    * campos obrigatórios
+                    * Irá Fazer um desconto em todas as contas activas no sistema
                 </div>
                <div class="form">
                 @if (session('error'))
@@ -22,19 +22,6 @@
                 @csrf
 
                     <div class="row">
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="estado">Descontar Onde</label> <span class="text-danger">*</span>
-                               {{Form::select('estado',[
-                                   'on'=>"on",
-                                   'off'=>"off"
-                               ], null, ['class'=>"form-control", 'placeholder'=>"Estado"])}}
-                               @if($errors->has('estado'))
-                               <span class="text-danger">{{$errors->first('estado')}}</span>
-                                @endif
-                            </div>
-                        </div>
 
                         <div class="col-md-12">
                                 <div class="buttonLogin">
