@@ -133,7 +133,12 @@
 											{{Auth::user()->username}}
 											@endif
 										</p>
-										<a href="/perfil" class="btn btn-rounded btn-danger btn-sm">Ver Perfil</a>
+										@if (Auth::user()->acesso == "estudante")
+										
+										<a href="/contas/estado/{{Auth::user()->id}}" class="btn btn-rounded btn-warning btn-sm">Perfil</a>
+										
+										@endif
+										
 										</div>
 										</div>
 									</li>

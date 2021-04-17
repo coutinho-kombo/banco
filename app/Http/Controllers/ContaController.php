@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Conta;
+use App\Desconto;
 use App\Movimento;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ContaController extends Controller
 {
@@ -92,10 +94,11 @@ class ContaController extends Controller
         //
     }
 
-    public function deposito($id){
+    public function deposito($id)
+    {
         $conta = Conta::find($id);
-        if(!$conta){
-            return back()->with(['error'=>"Nao encontrou"]);
+        if (!$conta) {
+            return back()->with(['error' => "Nao encontrou"]);
         }
 
         $data = [
@@ -103,76 +106,100 @@ class ContaController extends Controller
             'type' => "contas",
             'menu' => "Contas",
             'submenu' => "Depósito",
-            'getConta'=>$conta,
+            'getConta' => $conta,
         ];
         return view('conta.deposito', $data);
     }
 
-    public function depositar(Request $request, $id){
+    public function depositar(Request $request, $id)
+    {
         $conta = Conta::find($id);
-        if(!$conta){
-            return back()->with(['error'=>"Nao encontrou"]);
+        if (!$conta) {
+            return back()->with(['error' => "Nao encontrou"]);
         }
 
         $request->validate([
-            'valor'=>['required', 'numeric', 'min:0'],
+            'valor' => ['required', 'numeric', 'min:0'],
         ]);
 
         $data['movimentos'] = [
-            'id_conta'=>$conta->id,
-            'tipo'=>"Crédito",
-            'descricao'=>"Depósito de um valor",
-            'valor'=>$request->valor,
-            'estado'=>"on",
+            'id_conta' => $conta->id,
+            'tipo' => "Crédito",
+            'descricao' => "Depósito de um valor",
+            'valor' => $request->valor,
+            'estado' => "on",
         ];
 
 
-        if(Conta::find($id)->increment('valor_existente', $request->valor)){
-            if(Movimento::create($data['movimentos'])){
-                return back()->with(['success'=>"Feito com sucesso"]);
+        if (Conta::find($id)->increment('valor_existente', $request->valor)) {
+            if (Movimento::create($data['movimentos'])) {
+                return back()->with(['success' => "Feito com sucesso"]);
             }
         }
-        
     }
 
-    public function movimentos($id){
+    public function movimentos($id)
+    {
         $conta = Conta::find($id);
-        if(!$conta){
-            return back()->with(['error'=>"Conta não encontrada"]);
+        if (!$conta) {
+            return back()->with(['error' => "Conta não encontrada"]);
         }
         $data = [
             'title' => "Contas",
             'type' => "contas",
             'menu' => "Contas",
             'submenu' => "Movimentos",
-            'getConta'=>$conta,
+            'getConta' => $conta,
         ];
         return view('conta.movimentos', $data);
     }
 
-    public function activar($id){
+    public function activar(Request $request, $id)
+    {
         $conta = Conta::find($id);
-        if(!$conta){
-            return back()->with(['error'=>"Conta nao encontrada"]);
+        if (!$conta) {
+            return back()->with(['error' => "Conta nao encontrada"]);
         }
 
-        if(Conta::find($id)->update(['estado'=>"on"])){
-            return back()->with(['success'=>"Activada com sucesso"]);
+        $desconto = Desconto::find(1);
+
+        if (Conta::find($id)->update(['estado' => "on"])) {
+            if (Conta::find($id)->decrement('valor_existente', $desconto->preco)) {
+                return back()->with(['success' => "Activada com sucesso"]);
+            }
         }
     }
 
-    public function activate($id){
+    public function activate($id)
+    {
         $conta = Conta::find($id);
-        if(!$conta){
-            return back()->with(['error'=>"Conta não encontrada"]);
+        if (!$conta) {
+            return back()->with(['error' => "Conta não encontrada"]);
         }
         $data = [
             'title' => "Contas",
             'type' => "contas",
             'menu' => "Contas",
             'submenu' => "Activar",
-            'getConta'=>$conta,
+            'getConta' => $conta,
         ];
         return view('conta.activar', $data);
+    }
+
+    public function estado($id)
+    {
+
+        $conta = Conta::where(['id_usuario' => Auth::user()->id])->first();
+        if (!$conta) {
+            return back()->with(['error' => "Conta não encontrada"]);
+        }
+        $data = [
+            'title' => "Contas",
+            'type' => "contas",
+            'menu' => "Contas",
+            'submenu' => "Perfil",
+            'getConta' => $conta,
+        ];
+        return view('conta.perfil', $data);
     }
 }

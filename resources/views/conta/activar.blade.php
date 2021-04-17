@@ -4,7 +4,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-            <div class="card-title">{{$submenu}} &nbsp;&nbsp;&nbsp;&nbsp;<a href="/contas/">Listar</a></div>
+            <div class="card-title">{{$submenu}} &nbsp;&nbsp;&nbsp;&nbsp;<a href="/contas/">Listar</a> &nbsp;&nbsp;&nbsp; {{$getConta->conta}}</div>
             </div>
             <div class="card-body">
                 <div class="card-sub">									
@@ -18,25 +18,13 @@
                 @if (session('success'))
                 <div class="alert bg-success" role="alert"><em class="fa fa-lg fa-check">&nbsp;</em> {{session('success')}} <a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a></div>
                  @endif
-                {{Form::open(['method'=>"post", 'name'=>"formServico", 'url'=>"/servicos/store"])}}
+                {{Form::open(['method'=>"put", 'name'=>"formActivar", 'url'=>"/contas/activar/{$getConta->id}"])}}
                 @csrf
 
                     <div class="row">
-                     
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="valor">Valor(Akz)</label> <span class="text-danger">*</span>
-                               {{Form::text('valor', null, ['class'=>"form-control", 'placeholder'=>"Valor"])}}
-                               @if($errors->has('valor'))
-                               <span class="text-danger">{{$errors->first('valor')}}</span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="col-md-12">
+                      <div class="col-md-12">
                                 <div class="buttonLogin">
-                                     <button class="btn btn-primary">Salvar</button>
-                                     
+                                     <button class="btn btn-primary">Activar</button>
                                  </div>
                          </div>
                     </div>

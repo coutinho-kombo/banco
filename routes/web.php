@@ -87,6 +87,7 @@ Route::group(['prefix'=>"descontos", 'middleware'=>"adminAuth"], function(){
 });
 
 Route::get('/contas/movimentos/{id}', "ContaController@movimentos")->middleware('auth');
+Route::get('/contas/estado/{id}', "ContaController@estado")->middleware('auth');
 
 /*ajax request*/
 Route::group(['prefix' => "ajax"], function () {

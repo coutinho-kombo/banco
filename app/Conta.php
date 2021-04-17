@@ -12,17 +12,18 @@ class Conta extends Model
         'id_usuario',
         'conta',
         'valor_existente',
-        'estado',
         'ficheiro_bilhete',
         'password',
         'estado',
     ];
 
-    public function usuario(){
+    public function usuario()
+    {
         return $this->belongsTo(User::class, 'id_usuario', 'id');
     }
 
-    public function movimento(){
+    public function movimento()
+    {
         return $this->hasMany(Movimento::class, 'id_conta', 'id');
     }
 }
