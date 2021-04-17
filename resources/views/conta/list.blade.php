@@ -33,7 +33,8 @@
                                 <a href="/contas/activate/{{$contas->id}}" class="btn btn-success btn-sm">Activar</a>
                                 &nbsp;&nbsp; 
                                 @endif
-                                
+                                <a href="/contas/perfil/{{$contas->id}}" class="btn btn-primary btn-sm">Perfil</a>
+                               &nbsp;&nbsp; 
                                 <a href="/contas/deposito/{{$contas->id}}" class="btn btn-warning btn-sm">Depósito</a>
                                &nbsp;&nbsp; 
                                <a href="/contas/movimentos/{{$contas->id}}" class="btn btn-info btn-sm">Movimentos</a>

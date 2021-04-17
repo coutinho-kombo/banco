@@ -163,22 +163,20 @@ class ContaController extends Controller
         $desconto = Desconto::find(1);
 
         $data = [
-            'id_conta'=>$id,
-            'tipo'=>"Desconto",
-            'descricao'=>$desconto->desconto,
-            'valor'=>$desconto->preco,
-            'estado'=>"on",
+            'id_conta' => $id,
+            'tipo' => "Desconto",
+            'descricao' => $desconto->desconto,
+            'valor' => $desconto->preco,
+            'estado' => "on",
         ];
-        $password = Auth::user()->id."".time();
-        if (Conta::find($id)->update(['estado' => "on", 'password'=>$password])) {
+        $password = Auth::user()->id . "" . time();
+        if (Conta::find($id)->update(['estado' => "on", 'password' => $password])) {
             if (Conta::find($id)->decrement('valor_existente', $desconto->preco)) {
-                if(Movimento::create($data)){
+                if (Movimento::create($data)) {
                     return back()->with(['success' => "Activada com sucesso"]);
                 }
-                
             }
         }
-        
     }
 
     public function activate($id)
@@ -204,6 +202,22 @@ class ContaController extends Controller
         if (!$conta) {
             return back()->with(['error' => "Conta não encontrada"]);
         }
+        $data = [
+            'title' => "Contas",
+            'type' => "contas",
+            'menu' => "Contas",
+            'submenu' => "Perfil",
+            'getConta' => $conta,
+        ];
+        return view('conta.perfil', $data);
+    }
+
+    public function perfil($id){
+        $conta = Conta::find($id);
+        if (!$conta) {
+            return back()->with(['error' => "Conta não encontrada"]);
+        }
+
         $data = [
             'title' => "Contas",
             'type' => "contas",

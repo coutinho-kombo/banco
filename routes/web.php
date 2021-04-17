@@ -54,6 +54,7 @@ Route::group(['prefix' => "contas", 'middleware' => "adminAuth"], function () {
     Route::put('/depositar/{id}', "ContaController@depositar");
     Route::put('/activar/{id}', "ContaController@activar");
     Route::get('/activate/{id}', "ContaController@activate");
+    Route::get('/perfil/{id}', "ContaController@perfil");
     
 });
 

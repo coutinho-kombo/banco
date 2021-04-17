@@ -18,6 +18,9 @@
                                 <th scope="col">Nº Conta</th>
                                 <th scope="col">Valor Existente</th>
                                 <th scope="col">Estado</th>
+                                @if (Auth::user()->acesso == "admin")
+                                    <th scope="col">Senha da Conta</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -25,6 +28,9 @@
                             <td>{{$getConta->conta}}</td>
                             <td>{{number_format($getConta->valor_existente,2,',','.')}} Akz</td>
                             <td>{{$getConta->estado}}</td>
+                            @if (Auth::user()->acesso == "admin")
+                            <td>{{$getConta->password}}</td>
+                            @endif
                             </tr>
                         </tbody>
                         
