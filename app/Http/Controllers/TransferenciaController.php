@@ -68,6 +68,14 @@ class TransferenciaController extends Controller
         if(!$conta2){
             return back()->with(['error'=>"Conta de Destino Incorrecta"]);
         }
+
+        if($conta->estado=="off"){
+            return back()->with(['error'=>"Deve requisitar a Activação da sua Conta"]);
+        }
+
+        if($conta2->estado=="off"){
+            return back()->with(['error'=>"A conta em que está transferir esta Desactivada"]);
+        }
         
         $data['envio'] = [
             'id_conta' => $conta->id,
@@ -97,7 +105,7 @@ class TransferenciaController extends Controller
                     /*conta recebido*/
                     if(Conta::find($conta2->id)->increment('valor_existente', $request->valor)){
                         if (Movimento::create($data['recebido'])) {
-                            return back()->with(['success' => "Feito com sucesso"]);
+                            return back()->with(['success' => "Feito com sucesso. ".$conta2->usuario->pessoa->nome]);
                         }
                     }
                      

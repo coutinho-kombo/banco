@@ -71,6 +71,10 @@ class PagamentoController extends Controller
             return back()->with(['error'=>"Conta nao encontrada"]);
         }
 
+        if($conta->estado=="off"){
+            return back()->with(['error'=>"Deve requisitar a Activação da sua Conta"]);
+        }
+
         $request->validate([
             'descricao' => ['required', 'min:10', 'max:40'],
             'valor' => ['required', 'numeric', 'min:1'],
