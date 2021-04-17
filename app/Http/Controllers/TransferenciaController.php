@@ -90,7 +90,7 @@ class TransferenciaController extends Controller
             return back()->with(['error' => "Saldo insuficiente para completar a Operação: " . (number_format($conta->valor_existente, 2, ',', '.')) . "Akz"]);
         }
 
-        if (Hash::check($request->password, Auth::user()->password)) {
+        if ($request->password==$conta->password) {
             /*conta de envio*/
             if (Conta::find($conta->id)->decrement('valor_existente', $request->valor)) {
                 if (Movimento::create($data['envio'])) {

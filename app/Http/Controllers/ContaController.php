@@ -169,7 +169,7 @@ class ContaController extends Controller
             'valor' => $desconto->preco,
             'estado' => "on",
         ];
-        $password = Auth::user()->id . "" . time();
+        $password = $conta->id_usuario . "" . time();
         if (Conta::find($id)->update(['estado' => "on", 'password' => $password])) {
             if (Conta::find($id)->decrement('valor_existente', $desconto->preco)) {
                 if (Movimento::create($data)) {

@@ -94,7 +94,7 @@ class PagamentoController extends Controller
             return back()->with(['error' => "Saldo insuficiente para completar a Operação: " . (number_format($conta->valor_existente, 2, ',', '.')) . "Akz"]);
         }
 
-        if (Hash::check($request->password, Auth::user()->password)) {
+        if ($conta->password == $request->password) {
             if (Conta::find($id)->decrement('valor_existente', $request->valor)) {
                 if (Movimento::create($data)) {
                     return back()->with(['success' => "Feito com sucesso"]);
