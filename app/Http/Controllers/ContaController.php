@@ -227,4 +227,16 @@ class ContaController extends Controller
         ];
         return view('conta.perfil', $data);
     }
+
+    public function cancelar(){
+        $conta = Conta::where(['id_usuario'=>Auth::user()->id])->first();
+        if(!$conta){
+            return back()->with(['error'=>"Conta nao encontrada"]);
+        }
+
+        if(Conta::find($conta->id)->update(['estado'=>"off", 'password'=>""])){
+            return back()->with(['success'=>"Conta Cancelada com sucesso"]);
+        }
+        echo "h";
+    }
 }

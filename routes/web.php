@@ -55,7 +55,6 @@ Route::group(['prefix' => "contas", 'middleware' => "adminAuth"], function () {
     Route::put('/activar/{id}', "ContaController@activar");
     Route::get('/activate/{id}', "ContaController@activate");
     Route::get('/perfil/{id}', "ContaController@perfil");
-    
 });
 
 Route::group(['prefix' => "pagamentos", 'middleware' => "estudanteAuth"], function () {
@@ -89,6 +88,7 @@ Route::group(['prefix'=>"descontos", 'middleware'=>"adminAuth"], function(){
 
 Route::get('/contas/movimentos/{id}', "ContaController@movimentos")->middleware('auth');
 Route::get('/contas/estado/{id}', "ContaController@estado")->middleware('auth');
+Route::get('/contas/cancelar/', "ContaController@cancelar")->middleware('auth');
 
 /*ajax request*/
 Route::group(['prefix' => "ajax"], function () {
